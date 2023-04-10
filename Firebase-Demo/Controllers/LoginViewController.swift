@@ -45,7 +45,6 @@ class LoginViewController: UIViewController {
             return
         }
         continueLoginFlow(email: email, password: password)
-        
     }
     
     private func continueLoginFlow(email: String, password: String) {
@@ -54,8 +53,10 @@ class LoginViewController: UIViewController {
                 switch result {
                 case .failure(let error):
                     self?.setUserLoginUI(color: .systemRed, text: "\(error.localizedDescription)")
-                case .success(let authDataResult):
-                    self?.setUserLoginUI(color: .systemGreen, text: "Welcome back user with email: \(authDataResult.user.email ?? "")")
+                case .success:
+                    DispatchQueue.main.async {
+                        self?.navigateToMainView()
+                    }
                 }
             }
         } else {
@@ -64,7 +65,9 @@ class LoginViewController: UIViewController {
                 case .failure(let error):
                     self?.setUserLoginUI(color: .systemRed, text: "\(error.localizedDescription)")
                 case .success:
-                    self?.setUserLoginUI(color: .systemGreen, text: "You're good to go!")
+                    DispatchQueue.main.async {
+                        self?.navigateToMainView()
+                    }
                 }
             }
         }
@@ -75,6 +78,10 @@ class LoginViewController: UIViewController {
             self.errorLabel.text = text
             self.errorLabel.textColor = color
         }
+    }
+    
+    private func navigateToMainView() {
+        UIViewController.showViewController(storyBoardName: "MainView", viewControllerID: "MainTabBarController")
     }
     
     private func clearErrorLabel() {
@@ -103,4 +110,3 @@ class LoginViewController: UIViewController {
         }
     }
 }
-
