@@ -31,7 +31,7 @@ extension SellItemViewController: UICollectionViewDataSource {
             fatalError("could not dequeue a category cell")
         }
         let category = categories[indexPath.row]
-        cell.configureCellUI(for: category)
+        cell.configureCell(for: category)
         return cell
     }
 }
@@ -53,5 +53,12 @@ extension SellItemViewController: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         // TODO: segue to createItemViewController
+        
+        let storyboard = UIStoryboard(name: "MainView", bundle: nil)
+        let category = categories[indexPath.row]
+        let createItemVC = storyboard.instantiateViewController(identifier: "CreateItemViewController") { coder in
+            return CreateItemViewController(coder: coder, category: category)
+        }
+        present(UINavigationController(rootViewController: createItemVC), animated: true)
     }
 }

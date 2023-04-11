@@ -82,6 +82,52 @@
             </objects>
             <point key="canvasLocation" x="-576.33587786259545" y="334.50704225352115"/>
         </scene>
+        <!--List an Item-->
+        <scene sceneID="buc-aH-KgS">
+            <objects>
+                <viewController storyboardIdentifier="CreateItemViewController" id="rG9-z2-07i" customClass="CreateItemViewController" customModule="Firebase_Demo" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="vAb-9H-yPG">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="enter item title" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="oJI-JQ-Goi">
+                                <rect key="frame" x="20" y="123" width="353" height="34"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocorrectionType="no"/>
+                            </textField>
+                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="enter item price" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="bkQ-9m-GBH">
+                                <rect key="frame" x="20" y="177" width="353" height="34"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" keyboardType="decimalPad"/>
+                            </textField>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="PdD-If-d9E"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="PdD-If-d9E" firstAttribute="trailing" secondItem="bkQ-9m-GBH" secondAttribute="trailing" constant="20" id="2gE-mO-Inm"/>
+                            <constraint firstItem="PdD-If-d9E" firstAttribute="trailing" secondItem="oJI-JQ-Goi" secondAttribute="trailing" constant="20" id="83j-yE-3yn"/>
+                            <constraint firstItem="bkQ-9m-GBH" firstAttribute="top" secondItem="oJI-JQ-Goi" secondAttribute="bottom" constant="20" id="B4q-hS-boC"/>
+                            <constraint firstItem="oJI-JQ-Goi" firstAttribute="leading" secondItem="PdD-If-d9E" secondAttribute="leading" constant="20" id="hVB-i4-TSb"/>
+                            <constraint firstItem="bkQ-9m-GBH" firstAttribute="leading" secondItem="PdD-If-d9E" secondAttribute="leading" constant="20" id="mQj-PY-4fn"/>
+                            <constraint firstItem="oJI-JQ-Goi" firstAttribute="top" secondItem="PdD-If-d9E" secondAttribute="top" constant="20" id="xm2-md-R0r"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="List an Item" id="hw8-i0-wyb">
+                        <barButtonItem key="rightBarButtonItem" title="List" id="I5O-HM-4sJ">
+                            <connections>
+                                <action selector="listButtonPressed:" destination="rG9-z2-07i" id="GGU-Hg-Bq1"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="itemPriceTextField" destination="bkQ-9m-GBH" id="Foe-Ng-BME"/>
+                        <outlet property="itemTitleTextField" destination="oJI-JQ-Goi" id="VUI-ad-Diw"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="t9x-Bd-lRG" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="350.38167938931298" y="1048.5915492957747"/>
+        </scene>
         <!--Item Feed-->
         <scene sceneID="qfc-bx-A46">
             <objects>
@@ -186,6 +232,25 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="PpJ-DQ-2kc" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-593" y="-479"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="D1c-MW-7Tt">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="wgv-vv-Xb5" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationItem key="navigationItem" id="TYF-j9-I0a"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="QEV-DR-K33">
+                        <rect key="frame" x="0.0" y="59" width="393" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="rG9-z2-07i" kind="relationship" relationship="rootViewController" id="1JK-KC-V6y"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="po8-rJ-zJj" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-576.33587786259545" y="1048.5915492957747"/>
         </scene>
     </scenes>
     <resources>
