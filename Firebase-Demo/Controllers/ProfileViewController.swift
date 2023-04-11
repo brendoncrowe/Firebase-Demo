@@ -21,7 +21,7 @@ class ProfileViewController: UIViewController {
         updateUI()
     }
     
-    private func updateUI() {
+    private func updateUI() { // set the user info with this function
         guard let user = Auth.auth().currentUser else {
             return
         }
@@ -39,7 +39,7 @@ class ProfileViewController: UIViewController {
             print("missing fields")
             return
         }
-        // to make a change to the user's name, you must make a request
+        // to make a change to the user's name, you must make a request to Firebase
         let request = Auth.auth().currentUser?.createProfileChangeRequest()
         request?.displayName = displayName
         request?.commitChanges(completion: { [unowned self] error in

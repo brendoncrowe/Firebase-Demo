@@ -6,24 +6,81 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21678"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="collection view cell content view" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
         <!--Sell Item-->
         <scene sceneID="7oV-wk-9vT">
             <objects>
-                <viewController id="JUQ-fy-nDy" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SellItemViewController" id="JUQ-fy-nDy" customClass="SellItemViewController" customModule="Firebase_Demo" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="fqa-bL-e87">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="PCV-sr-Eid">
+                                <rect key="frame" x="0.0" y="0.0" width="393" height="769"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="cgY-K6-NQ6">
+                                    <size key="itemSize" width="309" height="321"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="categoryCell" id="VS6-fM-iRa" customClass="CategoryCell" customModule="Firebase_Demo" customModuleProvider="target">
+                                        <rect key="frame" x="42" y="0.0" width="309" height="321"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="AFD-My-UWp">
+                                            <rect key="frame" x="0.0" y="0.0" width="309" height="321"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="photo.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="MLC-ww-D26">
+                                                    <rect key="frame" x="0.0" y="1.6666666666666714" width="309" height="189.66666666666669"/>
+                                                </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RKP-QZ-XUl">
+                                                    <rect key="frame" x="8" y="292.66666666666669" width="293" height="20.333333333333314"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="MLC-ww-D26" firstAttribute="height" secondItem="AFD-My-UWp" secondAttribute="height" multiplier="0.6" id="5W2-Sh-tey"/>
+                                                <constraint firstItem="MLC-ww-D26" firstAttribute="top" secondItem="AFD-My-UWp" secondAttribute="top" id="HwQ-fY-8LU"/>
+                                                <constraint firstAttribute="bottom" secondItem="RKP-QZ-XUl" secondAttribute="bottom" constant="8" id="YIg-uC-qPr"/>
+                                                <constraint firstItem="MLC-ww-D26" firstAttribute="leading" secondItem="AFD-My-UWp" secondAttribute="leading" id="ZDX-hQ-JN7"/>
+                                                <constraint firstItem="RKP-QZ-XUl" firstAttribute="leading" secondItem="AFD-My-UWp" secondAttribute="leading" constant="8" id="mTs-8C-7aL"/>
+                                                <constraint firstAttribute="trailing" secondItem="RKP-QZ-XUl" secondAttribute="trailing" constant="8" id="nrc-8v-aHf"/>
+                                                <constraint firstAttribute="trailing" secondItem="MLC-ww-D26" secondAttribute="trailing" id="pwV-dq-zGJ"/>
+                                            </constraints>
+                                        </collectionViewCellContentView>
+                                        <size key="customSize" width="309" height="321"/>
+                                        <connections>
+                                            <outlet property="categoryImageView" destination="MLC-ww-D26" id="yB8-7H-Qgy"/>
+                                            <outlet property="categoryNameLabel" destination="RKP-QZ-XUl" id="t3f-9S-r6w"/>
+                                        </connections>
+                                    </collectionViewCell>
+                                </cells>
+                            </collectionView>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="uzx-EO-Xyd"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="PCV-sr-Eid" firstAttribute="bottom" secondItem="uzx-EO-Xyd" secondAttribute="bottom" id="1g7-Cp-fDw"/>
+                            <constraint firstItem="PCV-sr-Eid" firstAttribute="trailing" secondItem="uzx-EO-Xyd" secondAttribute="trailing" id="VsV-Vr-iVE"/>
+                            <constraint firstItem="PCV-sr-Eid" firstAttribute="leading" secondItem="uzx-EO-Xyd" secondAttribute="leading" id="bJF-2b-jwa"/>
+                            <constraint firstItem="PCV-sr-Eid" firstAttribute="top" secondItem="fqa-bL-e87" secondAttribute="top" id="xjs-aV-fjE"/>
+                        </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" tag="1" title="Sell Item" id="tUg-aQ-l7r"/>
+                    <connections>
+                        <outlet property="collectionView" destination="PCV-sr-Eid" id="h6T-wC-Ghk"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="k16-lf-tRS" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-576" y="335"/>
+            <point key="canvasLocation" x="-576.33587786259545" y="334.50704225352115"/>
         </scene>
         <!--Item Feed-->
         <scene sceneID="qfc-bx-A46">
@@ -133,6 +190,7 @@
     </scenes>
     <resources>
         <image name="person" catalog="system" width="128" height="121"/>
+        <image name="photo.fill" catalog="system" width="128" height="93"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

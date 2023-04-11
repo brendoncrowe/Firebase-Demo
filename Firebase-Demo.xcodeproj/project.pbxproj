@@ -22,6 +22,8 @@
 		40D9CA1529E4CD11003E52E6 /* CreateItemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40D9CA1429E4CD11003E52E6 /* CreateItemViewController.swift */; };
 		40D9CA1729E4CD32003E52E6 /* UIViewController+Navigation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40D9CA1629E4CD32003E52E6 /* UIViewController+Navigation.swift */; };
 		40D9CA1929E4CD79003E52E6 /* UIViewController+Alerts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40D9CA1829E4CD79003E52E6 /* UIViewController+Alerts.swift */; };
+		40D9CA1B29E5FCD6003E52E6 /* CategoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40D9CA1A29E5FCD6003E52E6 /* CategoryCell.swift */; };
+		40D9CA1E29E5FE9D003E52E6 /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40D9CA1D29E5FE9D003E52E6 /* Category.swift */; };
 		57845ACD24092D4300F35651 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57845ACC24092D4300F35651 /* AppDelegate.swift */; };
 		57845ACF24092D4300F35651 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57845ACE24092D4300F35651 /* SceneDelegate.swift */; };
 		57845AD124092D4300F35651 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57845AD024092D4300F35651 /* LoginViewController.swift */; };
@@ -54,6 +56,8 @@
 		40D9CA1429E4CD11003E52E6 /* CreateItemViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateItemViewController.swift; sourceTree = "<group>"; };
 		40D9CA1629E4CD32003E52E6 /* UIViewController+Navigation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Navigation.swift"; sourceTree = "<group>"; };
 		40D9CA1829E4CD79003E52E6 /* UIViewController+Alerts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Alerts.swift"; sourceTree = "<group>"; };
+		40D9CA1A29E5FCD6003E52E6 /* CategoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryCell.swift; sourceTree = "<group>"; };
+		40D9CA1D29E5FE9D003E52E6 /* Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
 		57845AC924092D4300F35651 /* Firebase-Demo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Firebase-Demo.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		57845ACC24092D4300F35651 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		57845ACE24092D4300F35651 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -100,6 +104,14 @@
 			path = "Firebase Services";
 			sourceTree = "<group>";
 		};
+		40D9CA1C29E5FE94003E52E6 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				40D9CA1D29E5FE9D003E52E6 /* Category.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
 		57845AC024092D4300F35651 = {
 			isa = PBXGroup;
 			children = (
@@ -121,6 +133,7 @@
 		57845ACB24092D4300F35651 /* Firebase-Demo */ = {
 			isa = PBXGroup;
 			children = (
+				40D9CA1C29E5FE94003E52E6 /* Models */,
 				40CA594029E4A86B00D796F7 /* Firebase Services */,
 				57845AF72409337B00F35651 /* Storyboards */,
 				57845AF52409332000F35651 /* Views */,
@@ -156,6 +169,7 @@
 			children = (
 				57845AF024092DBB00F35651 /* GradientView.swift */,
 				57845AF224092DDC00F35651 /* DesignableView.swift */,
+				40D9CA1A29E5FCD6003E52E6 /* CategoryCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -302,6 +316,7 @@
 				40D9CA1729E4CD32003E52E6 /* UIViewController+Navigation.swift in Sources */,
 				57845AD124092D4300F35651 /* LoginViewController.swift in Sources */,
 				40D9CA0F29E4CCEB003E52E6 /* ItemFeedViewController.swift in Sources */,
+				40D9CA1B29E5FCD6003E52E6 /* CategoryCell.swift in Sources */,
 				40D9CA1329E4CD03003E52E6 /* ProfileViewController.swift in Sources */,
 				57845ACD24092D4300F35651 /* AppDelegate.swift in Sources */,
 				57845AF124092DBB00F35651 /* GradientView.swift in Sources */,
@@ -309,6 +324,7 @@
 				40D9CA1129E4CCFA003E52E6 /* SellItemViewController.swift in Sources */,
 				40D9CA0D29E4CCC4003E52E6 /* MainTabBarController.swift in Sources */,
 				57845AF324092DDC00F35651 /* DesignableView.swift in Sources */,
+				40D9CA1E29E5FE9D003E52E6 /* Category.swift in Sources */,
 				40D9CA1929E4CD79003E52E6 /* UIViewController+Alerts.swift in Sources */,
 				40CA594629E4A94C00D796F7 /* AuthenticationSession.swift in Sources */,
 				57845ACF24092D4300F35651 /* SceneDelegate.swift in Sources */,
