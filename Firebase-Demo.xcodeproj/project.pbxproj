@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		40CA592E29E4A4E800D796F7 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 40CA592D29E4A4E800D796F7 /* GoogleService-Info.plist */; };
-		40CA593329E4A69C00D796F7 /* FirebaseAnalyticsSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 40CA593229E4A69C00D796F7 /* FirebaseAnalyticsSwift */; };
 		40CA593529E4A69C00D796F7 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 40CA593429E4A69C00D796F7 /* FirebaseAuth */; };
 		40CA593929E4A69C00D796F7 /* FirebaseDatabaseSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 40CA593829E4A69C00D796F7 /* FirebaseDatabaseSwift */; };
 		40CA593D29E4A69C00D796F7 /* FirebaseFirestoreSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 40CA593C29E4A69C00D796F7 /* FirebaseFirestoreSwift */; };
@@ -83,7 +82,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				40CA593929E4A69C00D796F7 /* FirebaseDatabaseSwift in Frameworks */,
-				40CA593329E4A69C00D796F7 /* FirebaseAnalyticsSwift in Frameworks */,
 				40CA593529E4A69C00D796F7 /* FirebaseAuth in Frameworks */,
 				40CA593D29E4A69C00D796F7 /* FirebaseFirestoreSwift in Frameworks */,
 				40CA593F29E4A69C00D796F7 /* FirebaseStorage in Frameworks */,
@@ -222,7 +220,6 @@
 			);
 			name = "Firebase-Demo";
 			packageProductDependencies = (
-				40CA593229E4A69C00D796F7 /* FirebaseAnalyticsSwift */,
 				40CA593429E4A69C00D796F7 /* FirebaseAuth */,
 				40CA593829E4A69C00D796F7 /* FirebaseDatabaseSwift */,
 				40CA593C29E4A69C00D796F7 /* FirebaseFirestoreSwift */,
@@ -493,6 +490,7 @@
 				DEVELOPMENT_TEAM = NJ8L7C6778;
 				INFOPLIST_FILE = "Firebase-Demo/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "Brendon Crowe";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -512,6 +510,7 @@
 				DEVELOPMENT_TEAM = NJ8L7C6778;
 				INFOPLIST_FILE = "Firebase-Demo/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "Brendon Crowe";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -611,11 +610,6 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		40CA593229E4A69C00D796F7 /* FirebaseAnalyticsSwift */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 40CA592F29E4A69C00D796F7 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
-			productName = FirebaseAnalyticsSwift;
-		};
 		40CA593429E4A69C00D796F7 /* FirebaseAuth */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 40CA592F29E4A69C00D796F7 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;

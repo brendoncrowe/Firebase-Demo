@@ -131,18 +131,43 @@
         <!--Item Feed-->
         <scene sceneID="qfc-bx-A46">
             <objects>
-                <viewController id="WzV-wV-s3I" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ItemFeedViewController" id="WzV-wV-s3I" customClass="ItemFeedViewController" customModule="Firebase_Demo" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="3Ub-Qw-qAN">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="1pF-ek-WDd">
+                                <rect key="frame" x="0.0" y="59" width="393" height="710"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="itemCell" id="D3K-CQ-b3W">
+                                        <rect key="frame" x="0.0" y="50" width="393" height="43.666667938232422"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="D3K-CQ-b3W" id="od5-s4-4yr">
+                                            <rect key="frame" x="0.0" y="0.0" width="393" height="43.666667938232422"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="gTE-CR-lNd"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="1pF-ek-WDd" firstAttribute="bottom" secondItem="gTE-CR-lNd" secondAttribute="bottom" id="FFT-h7-d4X"/>
+                            <constraint firstItem="1pF-ek-WDd" firstAttribute="top" secondItem="gTE-CR-lNd" secondAttribute="top" id="kCB-LR-geT"/>
+                            <constraint firstItem="1pF-ek-WDd" firstAttribute="leading" secondItem="gTE-CR-lNd" secondAttribute="leading" id="kCh-Ll-5uE"/>
+                            <constraint firstItem="1pF-ek-WDd" firstAttribute="trailing" secondItem="gTE-CR-lNd" secondAttribute="trailing" id="rvY-MS-vlC"/>
+                        </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Item Feed" id="JsA-bK-ksa"/>
+                    <connections>
+                        <outlet property="tableView" destination="1pF-ek-WDd" id="kGL-n1-ep2"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JLc-bM-0uh" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1274" y="335"/>
+            <point key="canvasLocation" x="-1274.0458015267175" y="334.50704225352115"/>
         </scene>
         <!--Profile-->
         <scene sceneID="FYg-Ur-aAG">

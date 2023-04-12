@@ -11,7 +11,6 @@ import FirebaseAuth
 
 class CreateItemViewController: UIViewController {
     
-    
     @IBOutlet weak var itemTitleTextField: UITextField!
     @IBOutlet weak var itemPriceTextField: UITextField!
     

@@ -26,7 +26,7 @@ class DataBaseService {
         let documentReference = dataBase.collection(DataBaseService.itemsCollection).document()
 
         // create a document in "items" collection
-        dataBase.collection(DataBaseService.itemsCollection).document(documentReference.documentID).setData(["itemName": itemName, "price": price, "itemID": documentReference.documentID, "listedDate": Timestamp(date: Date()), "sellerName": displayName, "sellerId": user.uid, "categoryName": category.name]) { (error) in
+        dataBase.collection(DataBaseService.itemsCollection).document(documentReference.documentID).setData(["itemName": itemName, "price": price, "itemId": documentReference.documentID, "listedDate": Timestamp(date: Date()), "sellerName": displayName, "sellerId": user.uid, "categoryName": category.name]) { (error) in
             if let error = error {
                 completion(.failure(error))
             } else {
