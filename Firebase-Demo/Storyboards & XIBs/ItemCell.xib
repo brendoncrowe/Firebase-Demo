@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21678"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="itemCell" rowHeight="138" id="9eC-nP-v7G" customClass="ItemCell" customModule="Firebase_Demo" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="409" height="138"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="9eC-nP-v7G" id="lCd-Ak-nGI">
+                <rect key="frame" x="0.0" y="0.0" width="409" height="138"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="tag.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="GGv-9d-rCe" customClass="DesignableImageView" customModule="Firebase_Demo" customModuleProvider="target">
+                        <rect key="frame" x="20" y="20.333333333333336" width="98" height="98.666666666666657"/>
+                        <color key="backgroundColor" name="AccentColor"/>
+                        <constraints>
+                            <constraint firstAttribute="width" secondItem="GGv-9d-rCe" secondAttribute="height" multiplier="1:1" id="qNR-ic-6Gb"/>
+                        </constraints>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                <real key="value" value="8"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Item Name" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dc6-5H-7jk">
+                        <rect key="frame" x="126" y="19.999999999999996" width="275" height="33.666666666666657"/>
+                        <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Price" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AK2-7q-GSf">
+                        <rect key="frame" x="360.33333333333331" y="109" width="40.666666666666686" height="21"/>
+                        <color key="backgroundColor" name="AccentColor"/>
+                        <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
+                        <color key="textColor" systemColor="systemBackgroundColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Date" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wJ7-bY-8Ba">
+                        <rect key="frame" x="126" y="90.666666666666671" width="275" height="14.333333333333329"/>
+                        <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Seller Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jnh-zT-0Q7">
+                        <rect key="frame" x="126" y="61.666666666666657" width="275" height="21"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <constraints>
+                    <constraint firstAttribute="bottom" secondItem="GGv-9d-rCe" secondAttribute="bottom" constant="20" id="0Z2-vk-0HW"/>
+                    <constraint firstItem="Dc6-5H-7jk" firstAttribute="top" secondItem="lCd-Ak-nGI" secondAttribute="top" constant="20" id="2FC-fi-9M0"/>
+                    <constraint firstItem="Dc6-5H-7jk" firstAttribute="leading" secondItem="GGv-9d-rCe" secondAttribute="trailing" constant="8" id="6CI-Ka-ynK"/>
+                    <constraint firstItem="wJ7-bY-8Ba" firstAttribute="top" secondItem="jnh-zT-0Q7" secondAttribute="bottom" constant="8" id="6W7-60-Ca9"/>
+                    <constraint firstAttribute="bottom" secondItem="AK2-7q-GSf" secondAttribute="bottom" constant="8" id="P9v-X4-YYb"/>
+                    <constraint firstAttribute="trailing" secondItem="Dc6-5H-7jk" secondAttribute="trailing" constant="8" id="Uzm-XS-heC"/>
+                    <constraint firstAttribute="trailing" secondItem="wJ7-bY-8Ba" secondAttribute="trailing" constant="8" id="Yr5-jy-0Bg"/>
+                    <constraint firstItem="GGv-9d-rCe" firstAttribute="top" secondItem="lCd-Ak-nGI" secondAttribute="top" constant="20" id="Zif-vP-rEA"/>
+                    <constraint firstItem="wJ7-bY-8Ba" firstAttribute="leading" secondItem="GGv-9d-rCe" secondAttribute="trailing" constant="8" id="anD-If-FoW"/>
+                    <constraint firstItem="jnh-zT-0Q7" firstAttribute="leading" secondItem="GGv-9d-rCe" secondAttribute="trailing" constant="8" id="hgV-9r-eCt"/>
+                    <constraint firstItem="GGv-9d-rCe" firstAttribute="leading" secondItem="lCd-Ak-nGI" secondAttribute="leading" constant="20" id="hoG-qs-gIb"/>
+                    <constraint firstAttribute="trailing" secondItem="jnh-zT-0Q7" secondAttribute="trailing" constant="8" id="oha-hq-kKg"/>
+                    <constraint firstItem="jnh-zT-0Q7" firstAttribute="top" secondItem="Dc6-5H-7jk" secondAttribute="bottom" constant="8" id="pfh-2f-Ram"/>
+                    <constraint firstAttribute="trailing" secondItem="AK2-7q-GSf" secondAttribute="trailing" constant="8" id="tU2-mw-Sbw"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="dateLabel" destination="wJ7-bY-8Ba" id="LvE-TF-kHt"/>
+                <outlet property="itemImageView" destination="GGv-9d-rCe" id="nJq-VI-q4G"/>
+                <outlet property="itemNameLabel" destination="Dc6-5H-7jk" id="CEN-Zm-7NE"/>
+                <outlet property="priceLabel" destination="AK2-7q-GSf" id="tXc-51-4aa"/>
+                <outlet property="sellerNameLabel" destination="jnh-zT-0Q7" id="eQW-bc-0Dy"/>
+            </connections>
+            <point key="canvasLocation" x="325.95419847328242" y="12.67605633802817"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="tag.fill" catalog="system" width="128" height="118"/>
+        <namedColor name="AccentColor">
+            <color red="1" green="0.79199999570846558" blue="0.15700000524520874" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>

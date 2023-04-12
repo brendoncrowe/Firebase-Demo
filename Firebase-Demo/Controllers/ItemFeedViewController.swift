@@ -50,6 +50,7 @@ class ItemFeedViewController: UIViewController {
     private func configureTableView() {
         tableView.dataSource = self
         tableView.delegate = self
+        tableView.register(UINib(nibName: "ItemCell", bundle: nil), forCellReuseIdentifier: "itemCell")
     }
 }
 
@@ -60,17 +61,14 @@ extension ItemFeedViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "itemCell", for: indexPath)
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "itemCell", for: indexPath) as? ItemCell else {
+            fatalError("could not load an item cell")
+        }
         let item = items[indexPath.row]
-        var content = cell.defaultContentConfiguration()
-        content.text = item.itemName
-        let price = "$" + String(format: "%.2f", item.price)
-        content.secondaryText = price
-        cell.contentConfiguration = content
+        cell.configureCell(for: item)
         return cell
     }
 }
-
 
 extension ItemFeedViewController: UITableViewDelegate {
     
@@ -78,5 +76,7 @@ extension ItemFeedViewController: UITableViewDelegate {
         tableView.deselectRow(at: indexPath, animated: true)
     }
     
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 140
+    }
 }
-
