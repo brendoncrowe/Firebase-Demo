@@ -16,10 +16,22 @@ class ProfileViewController: UIViewController {
     @IBOutlet weak var displayNameTextField: UITextField!
     @IBOutlet weak var emailLabel: UILabel!
     
+    private var selectedImage: UIImage? {
+        didSet {
+            profileImageView.image = selectedImage
+        }
+    }
+    
+    private lazy var imagePickerController: UIImagePickerController = {
+        let ip = UIImagePickerController()
+        return ip
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         displayNameTextField.delegate = self
         updateUI()
+        imagePickerController.delegate = self
     }
     
     private func updateUI() { // set the user info with this function
@@ -65,7 +77,10 @@ class ProfileViewController: UIViewController {
     
     @IBAction func editProfileImagePressed(_ sender: UIButton) {
         let alertController = UIAlertController(title: "Choose Photo Option", message: nil, preferredStyle: .actionSheet)
-        let cameraAction = UIAlertAction(title: "Camera", style: .default, handler: nil)
+        let cameraAction = UIAlertAction(title: "Camera", style: .default) { action in
+            self.imagePickerController.sourceType = .camera
+            self.present(self.imagePickerController, animated: true)
+        }
         let photoLibraryAction = UIAlertAction(title: "Photo Library", style: .default) { action in
             self.changeProfileImage()
         }
@@ -80,7 +95,7 @@ class ProfileViewController: UIViewController {
         
     }
     
-   private func changeProfileImage() {
+    private func changeProfileImage() {
         var configuration = PHPickerConfiguration()
         configuration.filter = .images
         configuration.selectionLimit = 1
@@ -90,10 +105,7 @@ class ProfileViewController: UIViewController {
         }
         phpController.delegate = self
         present(phpController, animated: true)
-        
     }
-    
-    
 }
 
 extension ProfileViewController: UITextFieldDelegate {
@@ -113,7 +125,7 @@ extension ProfileViewController: PHPickerViewControllerDelegate {
             if itemProvider.canLoadObject(ofClass: UIImage.self) {
                 itemProvider.loadObject(ofClass: UIImage.self) { [weak self] image, error in
                     if let error = error {
-                        self?.showAlert(title: "Image Error", message: "Could not set image")
+                        self?.showAlert(title: "Image Error", message: "Could not set image: \(error)")
                         return
                     }
                     guard let image = image as? UIImage else {
@@ -121,11 +133,20 @@ extension ProfileViewController: PHPickerViewControllerDelegate {
                         return
                     }
                     DispatchQueue.main.async {
-                        self?.profileImageView.image = image
+                        self?.selectedImage = image
                     }
                 }
             }
         }
         picker.dismiss(animated: true)
+    }
+}
+
+extension ProfileViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        guard let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage else { return }
+        selectedImage = image
+        dismiss(animated: true)
     }
 }
