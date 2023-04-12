@@ -8,6 +8,7 @@
 
 import UIKit
 import FirebaseAuth
+import PhotosUI
 
 class ProfileViewController: UIViewController {
     
@@ -59,6 +60,40 @@ class ProfileViewController: UIViewController {
             print("error signing out: \(error)")
         }
     }
+    
+    
+    
+    @IBAction func editProfileImagePressed(_ sender: UIButton) {
+        let alertController = UIAlertController(title: "Choose Photo Option", message: nil, preferredStyle: .actionSheet)
+        let cameraAction = UIAlertAction(title: "Camera", style: .default, handler: nil)
+        let photoLibraryAction = UIAlertAction(title: "Photo Library", style: .default) { action in
+            self.changeProfileImage()
+        }
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        if UIImagePickerController.isSourceTypeAvailable(.camera) {
+            alertController.addAction(cameraAction)
+        }
+        alertController.addAction(photoLibraryAction)
+        alertController.addAction(cancelAction)
+        present(alertController, animated: true)
+        
+        
+    }
+    
+   private func changeProfileImage() {
+        var configuration = PHPickerConfiguration()
+        configuration.filter = .images
+        configuration.selectionLimit = 1
+        let phpController = PHPickerViewController(configuration: configuration)
+        if let sheet = phpController.sheetPresentationController {
+            sheet.detents = [.medium()]
+        }
+        phpController.delegate = self
+        present(phpController, animated: true)
+        
+    }
+    
+    
 }
 
 extension ProfileViewController: UITextFieldDelegate {
@@ -66,5 +101,31 @@ extension ProfileViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         return true
+    }
+}
+
+extension ProfileViewController: PHPickerViewControllerDelegate {
+    
+    func picker(_ picker: PHPickerViewController, didFinishPicking results: [PHPickerResult]) {
+        if !results.isEmpty {
+            let result = results.first!
+            let itemProvider = result.itemProvider
+            if itemProvider.canLoadObject(ofClass: UIImage.self) {
+                itemProvider.loadObject(ofClass: UIImage.self) { [weak self] image, error in
+                    if let error = error {
+                        self?.showAlert(title: "Image Error", message: "Could not set image")
+                        return
+                    }
+                    guard let image = image as? UIImage else {
+                        print("could not typecast image data")
+                        return
+                    }
+                    DispatchQueue.main.async {
+                        self?.profileImageView.image = image
+                    }
+                }
+            }
+        }
+        picker.dismiss(animated: true)
     }
 }
