@@ -11,8 +11,9 @@ import Foundation
 struct Item {
     let itemName: String
     let price: Double
-    let itemID: String
+    let itemID: String // firebase document id
     let listedDate: Date
     let sellerName: String
+    let sellerId: String
     let categoryName: String
 }

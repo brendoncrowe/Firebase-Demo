@@ -25,6 +25,7 @@
 		40D9CA1B29E5FCD6003E52E6 /* CategoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40D9CA1A29E5FCD6003E52E6 /* CategoryCell.swift */; };
 		40D9CA1E29E5FE9D003E52E6 /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40D9CA1D29E5FE9D003E52E6 /* Category.swift */; };
 		40D9CA2029E6025A003E52E6 /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40D9CA1F29E6025A003E52E6 /* Item.swift */; };
+		40D9CA2229E6054B003E52E6 /* DataBaseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40D9CA2129E6054B003E52E6 /* DataBaseService.swift */; };
 		57845ACD24092D4300F35651 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57845ACC24092D4300F35651 /* AppDelegate.swift */; };
 		57845ACF24092D4300F35651 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57845ACE24092D4300F35651 /* SceneDelegate.swift */; };
 		57845AD124092D4300F35651 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57845AD024092D4300F35651 /* LoginViewController.swift */; };
@@ -60,6 +61,7 @@
 		40D9CA1A29E5FCD6003E52E6 /* CategoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryCell.swift; sourceTree = "<group>"; };
 		40D9CA1D29E5FE9D003E52E6 /* Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
 		40D9CA1F29E6025A003E52E6 /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
+		40D9CA2129E6054B003E52E6 /* DataBaseService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataBaseService.swift; sourceTree = "<group>"; };
 		57845AC924092D4300F35651 /* Firebase-Demo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Firebase-Demo.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		57845ACC24092D4300F35651 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		57845ACE24092D4300F35651 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -102,6 +104,7 @@
 			isa = PBXGroup;
 			children = (
 				40CA594529E4A94C00D796F7 /* AuthenticationSession.swift */,
+				40D9CA2129E6054B003E52E6 /* DataBaseService.swift */,
 			);
 			path = "Firebase Services";
 			sourceTree = "<group>";
@@ -318,6 +321,7 @@
 			files = (
 				40D9CA1729E4CD32003E52E6 /* UIViewController+Navigation.swift in Sources */,
 				57845AD124092D4300F35651 /* LoginViewController.swift in Sources */,
+				40D9CA2229E6054B003E52E6 /* DataBaseService.swift in Sources */,
 				40D9CA0F29E4CCEB003E52E6 /* ItemFeedViewController.swift in Sources */,
 				40D9CA1B29E5FCD6003E52E6 /* CategoryCell.swift in Sources */,
 				40D9CA1329E4CD03003E52E6 /* ProfileViewController.swift in Sources */,

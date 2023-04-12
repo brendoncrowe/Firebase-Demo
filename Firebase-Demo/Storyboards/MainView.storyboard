@@ -187,6 +187,16 @@
                                     <action selector="updateProfileButtonPressed:" destination="jWV-a8-YrR" eventType="touchUpInside" id="j1d-Vz-RGe"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="coc-Ti-Pac">
+                                <rect key="frame" x="160" y="609.66666666666663" width="73" height="41"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                                <color key="tintColor" systemColor="systemRedColor"/>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal" title="Logout"/>
+                                <connections>
+                                    <action selector="logoutButtonPressed:" destination="jWV-a8-YrR" eventType="touchUpInside" id="Ybj-hM-dV2"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="SVz-aq-gwg"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -200,6 +210,8 @@
                             <constraint firstItem="SVz-aq-gwg" firstAttribute="trailing" secondItem="uuu-Rq-iz5" secondAttribute="trailing" constant="20" id="Tg1-B4-aQ4"/>
                             <constraint firstItem="uuu-Rq-iz5" firstAttribute="leading" secondItem="SVz-aq-gwg" secondAttribute="leading" constant="20" id="aNa-gP-0hY"/>
                             <constraint firstItem="SVz-aq-gwg" firstAttribute="trailing" secondItem="YSI-Pg-OgV" secondAttribute="trailing" constant="20" id="auM-fG-2IR"/>
+                            <constraint firstItem="coc-Ti-Pac" firstAttribute="top" secondItem="LSx-mC-m0T" secondAttribute="bottom" constant="166" id="ekc-nD-TcF"/>
+                            <constraint firstItem="coc-Ti-Pac" firstAttribute="centerX" secondItem="DOu-ER-8dd" secondAttribute="centerX" id="gOp-sD-adS"/>
                             <constraint firstItem="AGV-oJ-gdy" firstAttribute="centerX" secondItem="DOu-ER-8dd" secondAttribute="centerX" id="gVX-oT-XTG"/>
                         </constraints>
                     </view>
@@ -258,6 +270,9 @@
         <image name="photo.fill" catalog="system" width="128" height="93"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemRedColor">
+            <color red="1" green="0.23137254901960785" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

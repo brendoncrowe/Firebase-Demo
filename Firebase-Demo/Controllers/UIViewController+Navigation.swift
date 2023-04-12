@@ -20,14 +20,9 @@ extension UIViewController {
         window.rootViewController = rootViewController
     }
     
-    
     public static func showViewController(storyBoardName: String, viewControllerID: String) {
-        
         let storyboard = UIStoryboard(name: storyBoardName, bundle: nil)
         let newVC = storyboard.instantiateViewController(identifier: viewControllerID)
-        
         resetWindow(with: newVC)
-        
     }
-    
 }

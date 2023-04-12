@@ -50,6 +50,15 @@ class ProfileViewController: UIViewController {
             }
         })
     }
+    
+    @IBAction func logoutButtonPressed(_ sender: UIButton) {
+        do {
+            try Auth.auth().signOut()
+            UIViewController.showViewController(storyBoardName: "LoginView", viewControllerID: "LoginViewController")
+        } catch {
+            print("error signing out: \(error)")
+        }
+    }
 }
 
 extension ProfileViewController: UITextFieldDelegate {
