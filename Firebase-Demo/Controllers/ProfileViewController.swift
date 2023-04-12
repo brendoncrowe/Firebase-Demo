@@ -10,6 +10,7 @@ import UIKit
 import FirebaseAuth
 import PhotosUI
 
+
 class ProfileViewController: UIViewController {
     
     @IBOutlet weak var profileImageView: UIImageView!
@@ -22,6 +23,8 @@ class ProfileViewController: UIViewController {
         }
     }
     
+    private let storageService = StorageService()
+    
     private lazy var imagePickerController: UIImagePickerController = {
         let ip = UIImagePickerController()
         return ip
@@ -29,8 +32,8 @@ class ProfileViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        displayNameTextField.delegate = self
         updateUI()
+        displayNameTextField.delegate = self
         imagePickerController.delegate = self
     }
     
@@ -47,21 +50,40 @@ class ProfileViewController: UIViewController {
     
     @IBAction func updateProfileButtonPressed(_ sender: UIButton) {
         // change the user's display name
-        
-        guard let displayName = displayNameTextField.text, !displayName.isEmpty else {
+        guard let displayName = displayNameTextField.text, !displayName.isEmpty, let selectedImage = selectedImage else {
             print("missing fields")
             return
         }
-        // to make a change to the user's name, you must make a request to Firebase
-        let request = Auth.auth().currentUser?.createProfileChangeRequest()
-        request?.displayName = displayName
-        request?.commitChanges(completion: { [unowned self] error in
-            if let error = error {
-                self.showAlert(title: "Profile Update", message: "Error changing profile: \(error)")
-            } else {
-                self.showAlert(title: "Profile Update", message: "Successfully updated profile")
+        
+        guard let user = Auth.auth().currentUser else { return }
+        
+        // resize image before uploading to firebase using UIImage extension
+        let resizedImage = UIImage.resizeImage(originalImage: selectedImage, rect: profileImageView.bounds)
+        
+        storageService.uploadPhoto(userId: user.uid, image: resizedImage) { [weak self] result in
+            switch result {
+            case .failure(let error):
+                DispatchQueue.main.async {
+                    self?.showAlert(title: "Error uploading photo", message: "\(error.localizedDescription)")
+                }
+            case .success(let url):
+                // to make a change to the user's name, you must make a request to Firebase
+                let request = Auth.auth().currentUser?.createProfileChangeRequest()
+                request?.displayName = displayName
+                request?.photoURL = url
+                request?.commitChanges(completion: { [unowned self] error in
+                    if let error = error {
+                        DispatchQueue.main.async {
+                            self?.showAlert(title: "Profile update error", message: "Error changing profile: \(error.localizedDescription)")
+                        }
+                    } else {
+                        DispatchQueue.main.async {
+                            self?.showAlert(title: "Profile Update", message: "Successfully updated profile")
+                        }
+                    }
+                })
             }
-        })
+        }
     }
     
     @IBAction func logoutButtonPressed(_ sender: UIButton) {
@@ -72,8 +94,6 @@ class ProfileViewController: UIViewController {
             print("error signing out: \(error)")
         }
     }
-    
-    
     
     @IBAction func editProfileImagePressed(_ sender: UIButton) {
         let alertController = UIAlertController(title: "Choose Photo Option", message: nil, preferredStyle: .actionSheet)
@@ -91,8 +111,6 @@ class ProfileViewController: UIViewController {
         alertController.addAction(photoLibraryAction)
         alertController.addAction(cancelAction)
         present(alertController, animated: true)
-        
-        
     }
     
     private func changeProfileImage() {

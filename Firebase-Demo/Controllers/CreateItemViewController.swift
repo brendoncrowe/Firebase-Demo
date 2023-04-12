@@ -15,7 +15,6 @@ class CreateItemViewController: UIViewController {
     @IBOutlet weak var itemPriceTextField: UITextField!
     
     private var category: Category
-    
     private let dbService = DataBaseService()
     
     init?(coder: NSCoder, category: Category) {
@@ -32,7 +31,6 @@ class CreateItemViewController: UIViewController {
         navigationItem.title = category.name
 
     }
-    
     
     @IBAction func listButtonPressed(_ sender: UIBarButtonItem) {
         // TODO: create item and push to firebase 
