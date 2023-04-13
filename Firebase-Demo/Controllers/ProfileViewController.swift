@@ -9,6 +9,7 @@
 import UIKit
 import FirebaseAuth
 import PhotosUI
+import Kingfisher
 
 
 class ProfileViewController: UIViewController {
@@ -27,6 +28,7 @@ class ProfileViewController: UIViewController {
     
     private lazy var imagePickerController: UIImagePickerController = {
         let ip = UIImagePickerController()
+        ip.delegate = self
         return ip
     }()
     
@@ -34,7 +36,6 @@ class ProfileViewController: UIViewController {
         super.viewDidLoad()
         updateUI()
         displayNameTextField.delegate = self
-        imagePickerController.delegate = self
     }
     
     private func updateUI() { // set the user info with this function
@@ -43,9 +44,11 @@ class ProfileViewController: UIViewController {
         }
         emailLabel.text = user.email
         displayNameTextField.text = user.displayName
+        profileImageView.kf.setImage(with: user.photoURL)
         //        user.displayName
         //        user.photoURL
         //        user.phoneNumber
+        
     }
     
     @IBAction func updateProfileButtonPressed(_ sender: UIButton) {

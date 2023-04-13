@@ -101,6 +101,18 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" keyboardType="decimalPad"/>
                             </textField>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="photo.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="Llx-HX-dFZ" customClass="DesignableImageView" customModule="Firebase_Demo" customModuleProvider="target">
+                                <rect key="frame" x="96.666666666666686" y="232.66666666666663" width="200" height="197"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="200" id="bFf-1d-bRh"/>
+                                    <constraint firstAttribute="width" constant="200" id="ffD-IK-ong"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="16"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </imageView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="PdD-If-d9E"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -108,8 +120,10 @@
                             <constraint firstItem="PdD-If-d9E" firstAttribute="trailing" secondItem="bkQ-9m-GBH" secondAttribute="trailing" constant="20" id="2gE-mO-Inm"/>
                             <constraint firstItem="PdD-If-d9E" firstAttribute="trailing" secondItem="oJI-JQ-Goi" secondAttribute="trailing" constant="20" id="83j-yE-3yn"/>
                             <constraint firstItem="bkQ-9m-GBH" firstAttribute="top" secondItem="oJI-JQ-Goi" secondAttribute="bottom" constant="20" id="B4q-hS-boC"/>
+                            <constraint firstItem="Llx-HX-dFZ" firstAttribute="top" secondItem="bkQ-9m-GBH" secondAttribute="bottom" constant="20" id="DDv-7l-DWW"/>
                             <constraint firstItem="oJI-JQ-Goi" firstAttribute="leading" secondItem="PdD-If-d9E" secondAttribute="leading" constant="20" id="hVB-i4-TSb"/>
                             <constraint firstItem="bkQ-9m-GBH" firstAttribute="leading" secondItem="PdD-If-d9E" secondAttribute="leading" constant="20" id="mQj-PY-4fn"/>
+                            <constraint firstItem="Llx-HX-dFZ" firstAttribute="centerX" secondItem="vAb-9H-yPG" secondAttribute="centerX" id="nRO-hU-Onz"/>
                             <constraint firstItem="oJI-JQ-Goi" firstAttribute="top" secondItem="PdD-If-d9E" secondAttribute="top" constant="20" id="xm2-md-R0r"/>
                         </constraints>
                     </view>
@@ -121,6 +135,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="itemImageView" destination="Llx-HX-dFZ" id="tnb-dS-9dP"/>
                         <outlet property="itemPriceTextField" destination="bkQ-9m-GBH" id="Foe-Ng-BME"/>
                         <outlet property="itemTitleTextField" destination="oJI-JQ-Goi" id="VUI-ad-Diw"/>
                     </connections>

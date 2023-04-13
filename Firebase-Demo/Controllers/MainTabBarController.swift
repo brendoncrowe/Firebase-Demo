@@ -10,11 +10,8 @@ import UIKit
 
 class MainTabBarController: UITabBarController {
     
-    
-
     override func viewDidLoad() {
         super.viewDidLoad()
         tabBar.backgroundColor = .systemGroupedBackground
     }
-    
 }
