@@ -58,4 +58,14 @@ class DataBaseService {
             }
         }
     }
+    
+    public func delete(item: Item, completion: @escaping (Result<Bool, Error>) ->()) {
+        dataBase.collection(DataBaseService.itemsCollection).document(item.itemId).delete { (error) in
+            if let error = error {
+                completion(.failure(error))
+            } else {
+                completion(.success(true))
+            }
+        }
+    }
 }
