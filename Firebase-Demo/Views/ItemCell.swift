@@ -19,6 +19,7 @@ class ItemCell: UITableViewCell {
     
 
     public func configureCell(for item: Item) {
+        itemImageView.kf.setImage(with: URL(string: item.imageURL))
         itemNameLabel.text = item.itemName
         sellerNameLabel.text = "@" + item.sellerName
         dateLabel.text = item.listedDate.description

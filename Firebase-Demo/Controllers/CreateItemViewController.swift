@@ -17,7 +17,12 @@ class CreateItemViewController: UIViewController {
     @IBOutlet weak var itemPriceTextField: UITextField!
     @IBOutlet weak var itemImageView: UIImageView!
     
-    private var imagePickerController = UIImagePickerController()
+    private lazy var imagePickerController: UIImagePickerController = {
+        let ip = UIImagePickerController()
+        ip.delegate = self
+        return ip
+    }()
+    
     private let storageService = StorageService()
     
     private var selectedImage: UIImage? {
@@ -28,8 +33,9 @@ class CreateItemViewController: UIViewController {
     
     private var category: Category
     private let dbService = DataBaseService()
-    private lazy var gestureRecognizer: UILongPressGestureRecognizer = {
-        let gr = UILongPressGestureRecognizer()
+    private lazy var gestureRecognizer: UITapGestureRecognizer = {
+        let gr = UITapGestureRecognizer()
+        gr.numberOfTapsRequired = 1
         gr.delegate = self
         return gr
     }()
@@ -167,4 +173,13 @@ extension CreateItemViewController: PHPickerViewControllerDelegate {
 
 extension CreateItemViewController: UIGestureRecognizerDelegate {
     
+}
+
+extension CreateItemViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        guard let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage else { return }
+        selectedImage = image
+        dismiss(animated: true)
+    }
 }

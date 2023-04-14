@@ -25,6 +25,7 @@ class ProfileViewController: UIViewController {
     }
     
     private let storageService = StorageService()
+    private let dataBase = DataBaseService()
     
     private lazy var imagePickerController: UIImagePickerController = {
         let ip = UIImagePickerController()
@@ -70,6 +71,8 @@ class ProfileViewController: UIViewController {
                     self?.showAlert(title: "Error uploading photo", message: "\(error.localizedDescription)")
                 }
             case .success(let url):
+                self?.updateDataBaseUser(displayName: displayName, photoURL: url.absoluteString)
+                
                 // to make a change to the user's name, you must make a request to Firebase
                 let request = Auth.auth().currentUser?.createProfileChangeRequest()
                 request?.displayName = displayName
@@ -85,6 +88,17 @@ class ProfileViewController: UIViewController {
                         }
                     }
                 })
+            }
+        }
+    }
+    
+    private func updateDataBaseUser(displayName: String, photoURL: String) {
+        dataBase.updateDataBaseUser(displayName: displayName, photoURL: photoURL) { result in
+            switch result {
+            case .failure(let error):
+                print("failed to update user: \(error.localizedDescription)")
+            case .success:
+                print("successfully updated user")
             }
         }
     }
