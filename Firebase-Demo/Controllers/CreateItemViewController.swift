@@ -7,8 +7,9 @@
 //
 
 import UIKit
-import FirebaseAuth
 import PhotosUI
+import FirebaseAuth
+import FirebaseFirestore
 
 class CreateItemViewController: UIViewController {
     
@@ -17,6 +18,7 @@ class CreateItemViewController: UIViewController {
     @IBOutlet weak var itemImageView: UIImageView!
     
     private var imagePickerController = UIImagePickerController()
+    private let storageService = StorageService()
     
     private var selectedImage: UIImage? {
         didSet {
@@ -55,22 +57,52 @@ class CreateItemViewController: UIViewController {
     
     @IBAction func listButtonPressed(_ sender: UIBarButtonItem) {
         // TODO: create item and push to firebase
-        guard let itemName = itemTitleTextField.text, !itemName.isEmpty, let priceText = itemPriceTextField.text, !priceText.isEmpty, let price = Double(priceText)  else { showAlert(title: "Missing Fields", message: "All fields are required")
+        guard let itemName = itemTitleTextField.text, !itemName.isEmpty, let priceText = itemPriceTextField.text, !priceText.isEmpty, let price = Double(priceText), let selectedImage = selectedImage else { showAlert(title: "Missing Fields", message: "All fields are required along with a photo")
             return
         }
         guard let displayName = Auth.auth().currentUser?.displayName else {
             showAlert(title: "Incomplete Profile", message: "Please set display name in profile page.")
             return
         }
+        // resize image before uploading to storage
+        let resizedImage = UIImage.resizeImage(originalImage: selectedImage, rect: itemImageView.bounds)
+        
         dbService.createItem(itemName: itemName, price: price, category: category, displayName: displayName) { [weak self] result in
             switch result {
             case .failure(let error):
                 DispatchQueue.main.async {
                     self?.showAlert(title: "Error", message: "There was an error listing your item...\(error.localizedDescription)")
                 }
-            case .success:
+            case .success( let documentId):
+                self?.uploadPhoto(photo: resizedImage, documentId: documentId)
+            }
+        }
+    }
+    
+    private func uploadPhoto(photo: UIImage, documentId: String) {
+        storageService.uploadPhoto(itemId: documentId, image: photo) { [weak self] result in
+            switch result {
+            case .failure(let error):
                 DispatchQueue.main.async {
-                    self?.showAlert(title: "Yay!", message: "Your item has been successfully listed 🥳")
+                    self?.showAlert(title: "Error uploading photo", message: "\(error.localizedDescription)")
+                }
+            case .success(let url):
+                self?.updateItemImageURL(url, documentId: documentId)
+            }
+        }
+    }
+    
+    private func updateItemImageURL(_ url: URL, documentId: String) {
+        // update an existing document on Firebase
+        Firestore.firestore().collection(DataBaseService.itemsCollection).document(documentId).updateData(["imageURL": url.absoluteString]) { [weak self] error in
+            if let error = error {
+                DispatchQueue.main.async {
+                    self?.showAlert(title: "Failed to update item", message: "\(error.localizedDescription)")
+                }
+            } else {
+                print("image was updated")
+                DispatchQueue.main.async {
+                    self?.dismiss(animated: true)
                 }
             }
         }
