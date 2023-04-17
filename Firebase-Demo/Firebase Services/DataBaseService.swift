@@ -16,6 +16,7 @@ class DataBaseService {
     static let itemsCollection = "items" // collection name
     static let usersCollection = "users"
     static let commentsCollection = "comments" // sub collection on an item document
+    static let favoritesCollection = "favorites"
     
     // need a reference to the database that is being worked with
     private let dataBase = Firestore.firestore()
@@ -90,5 +91,43 @@ class DataBaseService {
                     completion(.success(true))
                 }
             }
+    }
+    
+    public func addToFavorites(item: Item, completion: @escaping (Result<Bool, Error>) -> ()) {
+        guard let user = Auth.auth().currentUser else { return }
+        dataBase.collection(DataBaseService.usersCollection).document(user.uid).collection(DataBaseService.favoritesCollection).document(item.itemId).setData(["itemName" : item.itemName, "price": item.price, "imageURL": item.imageURL, "favoritedDate": Timestamp(date: Date()), "itemId": item.itemId, "sellerId": item.sellerId, "sellerName": item.sellerName]) { error in
+            if let error = error {
+                completion(.failure(error))
+            } else {
+                completion(.success(true))
+            }
+        }
+    }
+    
+    public func removeFromFavorites(item: Item, completion: @escaping (Result<Bool, Error>) -> ()) {
+        guard let user = Auth.auth().currentUser else { return }
+        dataBase.collection(DataBaseService.usersCollection).document(user.uid).collection(DataBaseService.favoritesCollection).document(item.itemId).delete { error in
+            if let error = error {
+                completion(.failure(error))
+            } else {
+                completion(.success(true))
+            }
+        }
+    }
+    
+    public func checkItemIsInFavorites(item: Item, completion: @escaping (Result<Bool, Error>) -> ()) {
+        guard let user = Auth.auth().currentUser else { return }
+        
+        // in firebase use the "where" keyword to query/search a collection
+        dataBase.collection(DataBaseService.usersCollection).document(user.uid).collection(DataBaseService.favoritesCollection).whereField("itemId", isEqualTo: item.itemId).getDocuments { snapshot, error in
+            // getDocuments - fetches documents only once
+            // addSnapShotListener - continues to listen for modifications to a collection 
+            
+            if let error = error {
+                completion(.failure(error))
+            } else if let snapshot = snapshot {
+                completion(.success(true))
+            }
+        }
     }
 }

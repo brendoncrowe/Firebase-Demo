@@ -106,7 +106,6 @@ class ItemDetailController: UIViewController {
                 }
             case .success:
                 DispatchQueue.main.async {
-                    self?.showAlert(title: "Success", message: "Comment was posted")
                     self?.commentTextField.text?.removeAll()
                 }
             }
@@ -138,6 +137,11 @@ class ItemDetailController: UIViewController {
         containerViewYConstraint.constant = originalValueForConstraint
         commentTextField.resignFirstResponder()
     }
+    
+    @IBAction func favoriteButtonPressed(_ sender: UIBarButtonItem) {
+        
+    }
+    
 }
 
 extension ItemDetailController: UITableViewDataSource {

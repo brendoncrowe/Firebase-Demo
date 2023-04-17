@@ -74,7 +74,7 @@
                             <constraint firstItem="PCV-sr-Eid" firstAttribute="top" secondItem="fqa-bL-e87" secondAttribute="top" id="xjs-aV-fjE"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" tag="1" title="Sell Item" id="tUg-aQ-l7r"/>
+                    <tabBarItem key="tabBarItem" tag="1" title="Sell Item" image="dollarsign.circle" catalog="system" id="tUg-aQ-l7r"/>
                     <connections>
                         <outlet property="collectionView" destination="PCV-sr-Eid" id="h6T-wC-Ghk"/>
                     </connections>
@@ -271,7 +271,7 @@
                             <constraint firstItem="MLZ-OR-A1H" firstAttribute="leading" secondItem="AGV-oJ-gdy" secondAttribute="trailing" constant="8" id="pMw-yX-JMX"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" tag="2" title="Profile" id="wwZ-O8-Pci"/>
+                    <tabBarItem key="tabBarItem" tag="2" title="Profile" image="person" catalog="system" id="wwZ-O8-Pci"/>
                     <connections>
                         <outlet property="displayNameTextField" destination="YSI-Pg-OgV" id="Fwc-zE-NZ3"/>
                         <outlet property="emailLabel" destination="uuu-Rq-iz5" id="ej1-Il-8aH"/>
@@ -379,7 +379,14 @@
                             <constraint firstItem="TLL-fx-3CL" firstAttribute="trailing" secondItem="fUB-fR-izV" secondAttribute="trailing" id="yAv-MB-2hJ"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="EWB-Fx-FR7"/>
+                    <navigationItem key="navigationItem" id="EWB-Fx-FR7">
+                        <barButtonItem key="rightBarButtonItem" title="Item" image="heart" catalog="system" id="o6w-3m-awB">
+                            <color key="tintColor" systemColor="systemRedColor"/>
+                            <connections>
+                                <action selector="favoriteButtonPressed:" destination="TIL-g7-0ip" id="iQg-Dl-KZ0"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="commentTextField" destination="EkF-PP-NKZ" id="rZv-xk-q8j"/>
                         <outlet property="containerViewYConstraint" destination="EKL-cg-3P2" id="Ji7-Qp-HaD"/>
@@ -431,7 +438,7 @@
         <scene sceneID="KRg-bb-kFW">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="OL5-Nf-9QW" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item Feed" id="JsA-bK-ksa"/>
+                    <tabBarItem key="tabBarItem" title="Item Feed" image="tag" catalog="system" id="JsA-bK-ksa"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="Znu-qk-dOG">
                         <rect key="frame" x="0.0" y="59" width="393" height="44"/>
@@ -448,9 +455,12 @@
         </scene>
     </scenes>
     <resources>
+        <image name="dollarsign.circle" catalog="system" width="128" height="123"/>
+        <image name="heart" catalog="system" width="128" height="107"/>
         <image name="pencil.circle.fill" catalog="system" width="128" height="123"/>
         <image name="person" catalog="system" width="128" height="121"/>
         <image name="photo.fill" catalog="system" width="128" height="93"/>
+        <image name="tag" catalog="system" width="128" height="118"/>
         <namedColor name="AccentColor">
             <color red="1" green="0.79199999570846558" blue="0.15700000524520874" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

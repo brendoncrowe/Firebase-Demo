@@ -85,6 +85,7 @@ class CreateItemViewController: UIViewController {
         }
     }
     
+    // helper function for listButtonPressed
     private func uploadPhoto(photo: UIImage, documentId: String) {
         storageService.uploadPhoto(itemId: documentId, image: photo) { [weak self] result in
             switch result {
@@ -98,6 +99,7 @@ class CreateItemViewController: UIViewController {
         }
     }
     
+    // helper function for uploadPhoto
     private func updateItemImageURL(_ url: URL, documentId: String) {
         // update an existing document on Firebase
         Firestore.firestore().collection(DataBaseService.itemsCollection).document(documentId).updateData(["imageURL": url.absoluteString]) { [weak self] error in
