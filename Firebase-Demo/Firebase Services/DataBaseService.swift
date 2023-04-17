@@ -68,4 +68,26 @@ class DataBaseService {
             }
         }
     }
+    
+    public func postComment(item: Item, comment: String, completion: @escaping (Result<Bool, Error>) -> ()) {
+        guard let user = Auth.auth().currentUser, let displayName = user.displayName else { return }
+        let docRef = dataBase // create a new document reference
+            .collection(DataBaseService.itemsCollection)
+            .document(item.itemId)
+            .collection(DataBaseService
+                .commentsCollection).document()
+        
+        // using the above document, the below code writes to it
+        dataBase.collection(DataBaseService.itemsCollection)
+            .document(item.itemId)
+            .collection(DataBaseService.commentsCollection)
+            .document(docRef.documentID)
+            .setData(["text" : comment, "createdData": Timestamp(date: Date()), "itemName": item.itemName, "itemId": item.itemId, "sellerName": item.sellerName, "commentedBy": displayName]) { error in
+                if let error = error {
+                    completion(.failure(error))
+                } else {
+                    completion(.success(true))
+                }
+            }
+    }
 }

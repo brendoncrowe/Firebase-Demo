@@ -75,6 +75,12 @@ extension ItemFeedViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+        let item = items[indexPath.row]
+        let storyboard = UIStoryboard(name: "MainView", bundle: nil)
+        let itemDetailController = storyboard.instantiateViewController(identifier: "ItemDetailController") { coder in
+            return ItemDetailController(coder: coder, item: item)
+        }
+        navigationController?.pushViewController(itemDetailController, animated: true)
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -98,7 +104,6 @@ extension ItemFeedViewController: UITableViewDelegate {
     }
     
     // allow the user who created the item to be the only one who can delete
-    
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         let item = items[indexPath.row]
         guard let user = Auth.auth().currentUser else { return false }
