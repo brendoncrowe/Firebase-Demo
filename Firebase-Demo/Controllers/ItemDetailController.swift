@@ -19,6 +19,15 @@ class ItemDetailController: UIViewController {
     private var originalValueForConstraint: CGFloat = 0
     private var dataBase = DataBaseService()
     private var listener: ListenerRegistration?
+    private var isFavorited = false {
+        didSet {
+            if isFavorited {
+                navigationItem.rightBarButtonItem?.image = UIImage(systemName: "heart.fill")
+            } else {
+                navigationItem.rightBarButtonItem?.image = UIImage(systemName: "heart")
+            }
+        }
+    }
     
     private var comments = [Comment]() {
         didSet {
@@ -53,9 +62,7 @@ class ItemDetailController: UIViewController {
         super.viewDidLoad()
         title = item.itemName
         configureVC()
-        tableView.tableHeaderView = HeaderView(imageURL: item.imageURL)
-        originalValueForConstraint = containerViewYConstraint.constant
-        view.addGestureRecognizer(tapGesture)
+        updateUI()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -80,10 +87,31 @@ class ItemDetailController: UIViewController {
         listener?.remove()
     }
     
+    private func updateUI() {
+        // check if item is favorited in order to update heart button
+        dataBase.checkItemIsInFavorites(item: item) { [weak self] result in
+            switch result {
+            case .failure(let error):
+                DispatchQueue.main.async {
+                    self?.showAlert(title: "Try again", message: error.localizedDescription)
+                }
+            case .success(let success):
+                if success {
+                    self?.isFavorited = true
+                } else {
+                    self?.isFavorited = false
+                }
+            }
+        }
+    }
+    
     private func configureVC() {
         tableView.dataSource = self
         tableView.delegate = self
         commentTextField.delegate = self
+        tableView.tableHeaderView = HeaderView(imageURL: item.imageURL)
+        originalValueForConstraint = containerViewYConstraint.constant
+        view.addGestureRecognizer(tapGesture)
     }
     
     @IBAction func postCommentButtonTapped(_ sender: UIButton) {
@@ -140,8 +168,36 @@ class ItemDetailController: UIViewController {
     
     @IBAction func favoriteButtonPressed(_ sender: UIBarButtonItem) {
         
+        if isFavorited { // remove from favorites
+            dataBase.removeFromFavorites(item: item) { [weak self] result in
+                switch result {
+                case .failure(let error):
+                    DispatchQueue.main.async {
+                        self?.showAlert(title: "Favoriting Error", message: error.localizedDescription)
+                    }
+                case .success:
+                    DispatchQueue.main.async {
+                        print("item was removed")
+                        self?.isFavorited = false
+                    }
+                }
+            }
+        } else { // add to favorites
+            dataBase.addToFavorites(item: item) { [weak self] result in
+                switch result {
+                case .failure(let error):
+                    DispatchQueue.main.async {
+                        self?.showAlert(title: "Favoriting Error", message: error.localizedDescription)
+                    }
+                case .success:
+                    DispatchQueue.main.async {
+                        print("item was favorited")
+                        self?.isFavorited = true
+                    }
+                }
+            }
+        }
     }
-    
 }
 
 extension ItemDetailController: UITableViewDataSource {

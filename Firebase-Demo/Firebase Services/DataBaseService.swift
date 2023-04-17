@@ -121,12 +121,17 @@ class DataBaseService {
         // in firebase use the "where" keyword to query/search a collection
         dataBase.collection(DataBaseService.usersCollection).document(user.uid).collection(DataBaseService.favoritesCollection).whereField("itemId", isEqualTo: item.itemId).getDocuments { snapshot, error in
             // getDocuments - fetches documents only once
-            // addSnapShotListener - continues to listen for modifications to a collection 
+            // addSnapShotListener - continues to listen for modifications to a collection
             
             if let error = error {
                 completion(.failure(error))
             } else if let snapshot = snapshot {
-                completion(.success(true))
+                let count = snapshot.documents.count // check if there are documents 
+                if count > 0 {
+                    completion(.success(true))
+                } else {
+                    completion(.success(false))
+                }
             }
         }
     }
