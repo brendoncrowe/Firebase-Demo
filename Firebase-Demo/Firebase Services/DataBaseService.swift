@@ -21,9 +21,7 @@ class DataBaseService {
     private let dataBase = Firestore.firestore()
     
     public func createItem(itemName: String, price: Double, category: Category, displayName: String, completion: @escaping (Result<String, Error>) -> ()) {
-        
         guard let user = Auth.auth().currentUser else { return }
-        
         // generate a document id/reference for the "items" collection for easier deletion later
         let documentReference = dataBase.collection(DataBaseService.itemsCollection).document()
         
@@ -70,7 +68,10 @@ class DataBaseService {
     }
     
     public func postComment(item: Item, comment: String, completion: @escaping (Result<Bool, Error>) -> ()) {
-        guard let user = Auth.auth().currentUser, let displayName = user.displayName else { return }
+        guard let user = Auth.auth().currentUser, let displayName = user.displayName else {
+            print("Missing user data")
+            return
+        }
         let docRef = dataBase // create a new document reference
             .collection(DataBaseService.itemsCollection)
             .document(item.itemId)
@@ -82,7 +83,7 @@ class DataBaseService {
             .document(item.itemId)
             .collection(DataBaseService.commentsCollection)
             .document(docRef.documentID)
-            .setData(["text" : comment, "createdData": Timestamp(date: Date()), "itemName": item.itemName, "itemId": item.itemId, "sellerName": item.sellerName, "commentedBy": displayName]) { error in
+            .setData(["text" : comment, "commentDate": Timestamp(date: Date()), "itemName": item.itemName, "itemId": item.itemId, "sellerName": item.sellerName, "commentedBy": displayName, "sellerId": item.sellerId]) { error in
                 if let error = error {
                     completion(.failure(error))
                 } else {

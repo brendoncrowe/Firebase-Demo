@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import FirebaseDatabase
+import FirebaseFirestore
 
 class ItemDetailController: UIViewController {
     
@@ -18,11 +18,26 @@ class ItemDetailController: UIViewController {
     private var item: Item
     private var originalValueForConstraint: CGFloat = 0
     private var dataBase = DataBaseService()
+    private var listener: ListenerRegistration?
+    
+    private var comments = [Comment]() {
+        didSet {
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+            }
+        }
+    }
     
     private lazy var tapGesture: UITapGestureRecognizer = {
         let gesture = UITapGestureRecognizer()
         gesture.addTarget(self, action: #selector(dismissKeyboard))
         return gesture
+    }()
+    
+    private lazy var dateFormatter: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "EEEE, MMM d, h:mm a"
+        return formatter
     }()
     
     init?(coder: NSCoder, item: Item) {
@@ -46,11 +61,23 @@ class ItemDetailController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         registerKeyboardNotifications()
+        
+        listener = Firestore.firestore().collection(DataBaseService.itemsCollection).document(item.itemId).collection(DataBaseService.commentsCollection).addSnapshotListener({ [weak self] snapshot, error in
+            if let error = error {
+                DispatchQueue.main.async {
+                    self?.showAlert(title: "Try Again", message: error.localizedDescription)
+                }
+            } else if let snapshot = snapshot {
+                let comments = snapshot.documents.map { Comment($0.data()) }
+                self?.comments = comments.sorted { $0.commentDate.dateValue() > $1.commentDate.dateValue() }
+            }
+        })
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         unregisterKeyboardNotifications()
+        listener?.remove()
     }
     
     private func configureVC() {
@@ -75,10 +102,12 @@ class ItemDetailController: UIViewController {
             case .failure(let error):
                 DispatchQueue.main.async {
                     self?.showAlert(title: "Comment error", message: "Error posting comment: \(error.localizedDescription)")
+                    self?.commentTextField.text?.removeAll()
                 }
             case .success:
                 DispatchQueue.main.async {
                     self?.showAlert(title: "Success", message: "Comment was posted")
+                    self?.commentTextField.text?.removeAll()
                 }
             }
         }
@@ -113,11 +142,17 @@ class ItemDetailController: UIViewController {
 
 extension ItemDetailController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
+        return comments.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "commentCell", for: indexPath)
+        let comment = comments[indexPath.row]
+        let dateString = dateFormatter.string(from: comment.commentDate.dateValue())
+        var content = cell.defaultContentConfiguration()
+        content.text = comment.text
+        content.secondaryText = "@" + comment.sellerName + " \(dateString)"
+        cell.contentConfiguration = content
         return cell
     }
 }

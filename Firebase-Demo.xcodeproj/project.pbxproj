@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		40042DF029EC6AE800D0C177 /* ItemDetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40042DEF29EC6AE800D0C177 /* ItemDetailController.swift */; };
 		40042DF229ED85A600D0C177 /* HeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40042DF129ED85A600D0C177 /* HeaderView.swift */; };
+		40042DF429EDB05A00D0C177 /* Comment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40042DF329EDB05A00D0C177 /* Comment.swift */; };
 		40CA592E29E4A4E800D796F7 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 40CA592D29E4A4E800D796F7 /* GoogleService-Info.plist */; };
 		40CA593529E4A69C00D796F7 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 40CA593429E4A69C00D796F7 /* FirebaseAuth */; };
 		40CA593929E4A69C00D796F7 /* FirebaseDatabaseSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 40CA593829E4A69C00D796F7 /* FirebaseDatabaseSwift */; };
@@ -58,6 +59,7 @@
 		132E704B439BCB653350278E /* Pods-Firebase-DemoTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Firebase-DemoTests.release.xcconfig"; path = "Target Support Files/Pods-Firebase-DemoTests/Pods-Firebase-DemoTests.release.xcconfig"; sourceTree = "<group>"; };
 		40042DEF29EC6AE800D0C177 /* ItemDetailController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemDetailController.swift; sourceTree = "<group>"; };
 		40042DF129ED85A600D0C177 /* HeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderView.swift; sourceTree = "<group>"; };
+		40042DF329EDB05A00D0C177 /* Comment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Comment.swift; sourceTree = "<group>"; };
 		40CA592D29E4A4E800D796F7 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		40CA594529E4A94C00D796F7 /* AuthenticationSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationSession.swift; sourceTree = "<group>"; };
 		40D9CA0A29E4CBF0003E52E6 /* MainView.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = MainView.storyboard; sourceTree = "<group>"; };
@@ -135,6 +137,7 @@
 			children = (
 				40D9CA1D29E5FE9D003E52E6 /* Category.swift */,
 				40D9CA1F29E6025A003E52E6 /* Item.swift */,
+				40042DF329EDB05A00D0C177 /* Comment.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -443,6 +446,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				40D9CA1729E4CD32003E52E6 /* UIViewController+Navigation.swift in Sources */,
+				40042DF429EDB05A00D0C177 /* Comment.swift in Sources */,
 				57845AD124092D4300F35651 /* LoginViewController.swift in Sources */,
 				40D9CA2629E71195003E52E6 /* ItemCell.swift in Sources */,
 				40D9CA2229E6054B003E52E6 /* DataBaseService.swift in Sources */,
