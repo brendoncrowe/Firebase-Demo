@@ -11,12 +11,40 @@ import FirebaseAuth
 import PhotosUI
 import Kingfisher
 
+enum ViewState {
+    case myItems
+    case favorites
+}
 
 class ProfileViewController: UIViewController {
     
     @IBOutlet weak var profileImageView: UIImageView!
     @IBOutlet weak var displayNameTextField: UITextField!
     @IBOutlet weak var emailLabel: UILabel!
+    @IBOutlet weak var tableView: UITableView!
+    
+    private var viewState: ViewState = .myItems {
+        didSet {
+            // TODO: display corresponding table view
+            tableView.reloadData()
+        }
+    }
+    
+    private var favorites = [String]() {
+        didSet {
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+            }
+        }
+    }
+    
+    private var myItems = [Item]() {
+        didSet {
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+            }
+        }
+    }
     
     private var selectedImage: UIImage? {
         didSet {
@@ -36,7 +64,9 @@ class ProfileViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         updateUI()
+        configureTV()
         displayNameTextField.delegate = self
+        fetchItems()
     }
     
     private func updateUI() { // set the user info with this function
@@ -46,10 +76,24 @@ class ProfileViewController: UIViewController {
         emailLabel.text = user.email
         displayNameTextField.text = user.displayName
         profileImageView.kf.setImage(with: user.photoURL)
-        //        user.displayName
-        //        user.photoURL
-        //        user.phoneNumber
-        
+    }
+    
+    private func fetchItems() {
+        guard let user = Auth.auth().currentUser else { return }
+        dataBase.fetchUserItems(userId: user.uid) { [weak self] result in
+            switch result {
+            case .failure(let error):
+                self?.showAlert(title: "Error loading", message: "could not load user items: \(error.localizedDescription)")
+            case .success(let items):
+                self?.myItems = items
+            }
+        }
+    }
+    
+    private func configureTV() {
+        tableView.delegate = self
+        tableView.dataSource = self
+        tableView.register(UINib(nibName: "ItemCell", bundle: nil), forCellReuseIdentifier: "itemCell")
     }
     
     @IBAction func updateProfileButtonPressed(_ sender: UIButton) {
@@ -112,6 +156,11 @@ class ProfileViewController: UIViewController {
         }
     }
     
+    
+    @IBAction func segmentedControlTapped(_ sender: UISegmentedControl) {
+        viewState = sender.selectedSegmentIndex == 0 ? .myItems : .favorites
+    }
+    
     @IBAction func editProfileImagePressed(_ sender: UIButton) {
         let alertController = UIAlertController(title: "Choose Photo Option", message: nil, preferredStyle: .actionSheet)
         let cameraAction = UIAlertAction(title: "Camera", style: .default) { action in
@@ -148,6 +197,36 @@ extension ProfileViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         return true
+    }
+}
+
+extension ProfileViewController: UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return viewState == .myItems ? myItems.count : favorites.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "itemCell", for: indexPath) as? ItemCell else {
+            fatalError("could not load an ItemCell")
+        }
+        if viewState == .myItems {
+            let item = myItems[indexPath.row]
+            cell.configureCell(for: item)
+        } else {
+            let _ = favorites[indexPath.row]
+//            cell.configureCell(for: favorite)
+        }
+        return cell
+    }
+}
+
+extension ProfileViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 140
     }
 }
 

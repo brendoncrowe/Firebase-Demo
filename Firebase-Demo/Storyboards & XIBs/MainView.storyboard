@@ -221,21 +221,12 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LSx-mC-m0T">
-                                <rect key="frame" x="130" y="408.66666666666669" width="133" height="35"/>
-                                <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" title="Update Profile"/>
+                                <rect key="frame" x="20" y="59" width="61" height="33"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal" title="Update "/>
                                 <connections>
                                     <action selector="updateProfileButtonPressed:" destination="jWV-a8-YrR" eventType="touchUpInside" id="j1d-Vz-RGe"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="coc-Ti-Pac">
-                                <rect key="frame" x="160" y="609.66666666666663" width="73" height="41"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="24"/>
-                                <color key="tintColor" systemColor="systemRedColor"/>
-                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                <state key="normal" title="Logout"/>
-                                <connections>
-                                    <action selector="logoutButtonPressed:" destination="jWV-a8-YrR" eventType="touchUpInside" id="Ybj-hM-dV2"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MLZ-OR-A1H" customClass="DesignableButton" customModule="Firebase_Demo" customModuleProvider="target">
@@ -251,24 +242,69 @@
                                     <action selector="editProfileImagePressed:" destination="jWV-a8-YrR" eventType="touchUpInside" id="k2h-Xg-SFa"/>
                                 </connections>
                             </button>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="2z2-V8-Si5">
+                                <rect key="frame" x="20" y="332" width="353" height="41"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="7Gv-50-2NM"/>
+                                </constraints>
+                                <segments>
+                                    <segment title="My Items"/>
+                                    <segment title="Favorites"/>
+                                </segments>
+                                <connections>
+                                    <action selector="segmentedControlTapped:" destination="jWV-a8-YrR" eventType="valueChanged" id="XLJ-18-MRd"/>
+                                </connections>
+                            </segmentedControl>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="wbJ-Ew-5vG">
+                                <rect key="frame" x="0.0" y="380" width="393" height="389"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="itemCell" id="02R-Gl-KoW">
+                                        <rect key="frame" x="0.0" y="50" width="393" height="43.666667938232422"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="02R-Gl-KoW" id="Tfb-Os-ukm">
+                                            <rect key="frame" x="0.0" y="0.0" width="393" height="43.666667938232422"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="coc-Ti-Pac">
+                                <rect key="frame" x="319" y="59" width="54" height="33"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="tintColor" systemColor="systemRedColor"/>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal" title="Logout"/>
+                                <connections>
+                                    <action selector="logoutButtonPressed:" destination="jWV-a8-YrR" eventType="touchUpInside" id="Ybj-hM-dV2"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="SVz-aq-gwg"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="LSx-mC-m0T" firstAttribute="centerY" secondItem="DOu-ER-8dd" secondAttribute="centerY" id="0ZG-YY-GAz"/>
-                            <constraint firstItem="LSx-mC-m0T" firstAttribute="centerX" secondItem="DOu-ER-8dd" secondAttribute="centerX" id="0lo-Ko-46j"/>
+                            <constraint firstItem="LSx-mC-m0T" firstAttribute="top" secondItem="SVz-aq-gwg" secondAttribute="top" id="7nA-GS-fct"/>
                             <constraint firstItem="uuu-Rq-iz5" firstAttribute="top" secondItem="YSI-Pg-OgV" secondAttribute="bottom" constant="20" id="D3r-Ag-XR6"/>
+                            <constraint firstItem="2z2-V8-Si5" firstAttribute="top" secondItem="uuu-Rq-iz5" secondAttribute="bottom" constant="8" id="OsY-fE-ldR"/>
                             <constraint firstItem="AGV-oJ-gdy" firstAttribute="top" secondItem="SVz-aq-gwg" secondAttribute="top" constant="40" id="Ou4-8H-iZs"/>
+                            <constraint firstItem="2z2-V8-Si5" firstAttribute="centerX" secondItem="DOu-ER-8dd" secondAttribute="centerX" id="Sqj-Li-ijo"/>
                             <constraint firstItem="YSI-Pg-OgV" firstAttribute="top" secondItem="AGV-oJ-gdy" secondAttribute="bottom" constant="20" id="SyS-Ql-Rw5"/>
                             <constraint firstItem="YSI-Pg-OgV" firstAttribute="leading" secondItem="SVz-aq-gwg" secondAttribute="leading" constant="20" id="TKN-NM-xyw"/>
+                            <constraint firstItem="wbJ-Ew-5vG" firstAttribute="leading" secondItem="SVz-aq-gwg" secondAttribute="leading" id="TXn-ny-4JE"/>
                             <constraint firstItem="SVz-aq-gwg" firstAttribute="trailing" secondItem="uuu-Rq-iz5" secondAttribute="trailing" constant="20" id="Tg1-B4-aQ4"/>
                             <constraint firstItem="MLZ-OR-A1H" firstAttribute="centerY" secondItem="AGV-oJ-gdy" secondAttribute="centerY" id="Tl6-H2-aV3"/>
+                            <constraint firstItem="SVz-aq-gwg" firstAttribute="trailing" secondItem="wbJ-Ew-5vG" secondAttribute="trailing" id="U0y-k8-1LB"/>
+                            <constraint firstItem="coc-Ti-Pac" firstAttribute="top" secondItem="SVz-aq-gwg" secondAttribute="top" id="Y7W-nF-oQA"/>
                             <constraint firstItem="uuu-Rq-iz5" firstAttribute="leading" secondItem="SVz-aq-gwg" secondAttribute="leading" constant="20" id="aNa-gP-0hY"/>
+                            <constraint firstItem="2z2-V8-Si5" firstAttribute="leading" secondItem="SVz-aq-gwg" secondAttribute="leading" constant="20" id="afx-KY-KBt"/>
                             <constraint firstItem="SVz-aq-gwg" firstAttribute="trailing" secondItem="YSI-Pg-OgV" secondAttribute="trailing" constant="20" id="auM-fG-2IR"/>
-                            <constraint firstItem="coc-Ti-Pac" firstAttribute="top" secondItem="LSx-mC-m0T" secondAttribute="bottom" constant="166" id="ekc-nD-TcF"/>
-                            <constraint firstItem="coc-Ti-Pac" firstAttribute="centerX" secondItem="DOu-ER-8dd" secondAttribute="centerX" id="gOp-sD-adS"/>
+                            <constraint firstItem="LSx-mC-m0T" firstAttribute="leading" secondItem="SVz-aq-gwg" secondAttribute="leading" constant="20" id="dyc-Uu-nJW"/>
                             <constraint firstItem="AGV-oJ-gdy" firstAttribute="centerX" secondItem="DOu-ER-8dd" secondAttribute="centerX" id="gVX-oT-XTG"/>
+                            <constraint firstItem="wbJ-Ew-5vG" firstAttribute="top" secondItem="2z2-V8-Si5" secondAttribute="bottom" constant="8" id="j0u-Ha-CyR"/>
+                            <constraint firstItem="SVz-aq-gwg" firstAttribute="trailing" secondItem="2z2-V8-Si5" secondAttribute="trailing" constant="20" id="kiA-ed-P1U"/>
                             <constraint firstItem="MLZ-OR-A1H" firstAttribute="leading" secondItem="AGV-oJ-gdy" secondAttribute="trailing" constant="8" id="pMw-yX-JMX"/>
+                            <constraint firstItem="SVz-aq-gwg" firstAttribute="bottom" secondItem="wbJ-Ew-5vG" secondAttribute="bottom" id="pgN-M8-iOe"/>
+                            <constraint firstItem="SVz-aq-gwg" firstAttribute="trailing" secondItem="coc-Ti-Pac" secondAttribute="trailing" constant="20" id="yHT-J8-XbK"/>
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" tag="2" title="Profile" image="person" catalog="system" id="wwZ-O8-Pci"/>
@@ -276,11 +312,12 @@
                         <outlet property="displayNameTextField" destination="YSI-Pg-OgV" id="Fwc-zE-NZ3"/>
                         <outlet property="emailLabel" destination="uuu-Rq-iz5" id="ej1-Il-8aH"/>
                         <outlet property="profileImageView" destination="AGV-oJ-gdy" id="dE1-wf-nJZ"/>
+                        <outlet property="tableView" destination="wbJ-Ew-5vG" id="J8L-bu-y6L"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lAC-0z-hKf" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="911" y="335"/>
+            <point key="canvasLocation" x="910.68702290076328" y="334.50704225352115"/>
         </scene>
         <!--Main Tab Bar Controller-->
         <scene sceneID="gxS-4a-niJ">
