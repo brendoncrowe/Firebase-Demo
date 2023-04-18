@@ -13,9 +13,7 @@ import FirebaseAuth
 class ItemFeedViewController: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
-    private var listener: ListenerRegistration?
-    private let databaseService = DataBaseService()
-    
+    private var listener: ListenerRegistration?   
     private var items = [Item]() {
         didSet {
             DispatchQueue.main.async {
@@ -38,7 +36,7 @@ class ItemFeedViewController: UIViewController {
                 }
             } else if let snapshot = snapshot {
                 let items = snapshot.documents.map { Item($0.data()) }
-                self?.items = items
+                self?.items = items.sorted { $0.listedDate.dateValue() > $1.listedDate.dateValue() }
             }
         })
     }
@@ -91,7 +89,7 @@ extension ItemFeedViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         let item = items[indexPath.row]
         if editingStyle == .delete {
-            databaseService.delete(item: item) { [weak self] result in
+            DataBaseService.shared.delete(item: item) { [weak self] result in
                 switch result {
                 case .failure(let error):
                     DispatchQueue.main.async {

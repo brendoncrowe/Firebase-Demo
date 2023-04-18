@@ -32,7 +32,6 @@ class CreateItemViewController: UIViewController {
     }
     
     private var category: Category
-    private let dbService = DataBaseService()
     private lazy var gestureRecognizer: UITapGestureRecognizer = {
         let gr = UITapGestureRecognizer()
         gr.numberOfTapsRequired = 1
@@ -73,7 +72,7 @@ class CreateItemViewController: UIViewController {
         // resize image before uploading to storage
         let resizedImage = UIImage.resizeImage(originalImage: selectedImage, rect: itemImageView.bounds)
         
-        dbService.createItem(itemName: itemName, price: price, category: category, displayName: displayName) { [weak self] result in
+        DataBaseService.shared.createItem(itemName: itemName, price: price, category: category, displayName: displayName) { [weak self] result in
             switch result {
             case .failure(let error):
                 DispatchQueue.main.async {

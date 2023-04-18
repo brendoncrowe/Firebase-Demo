@@ -54,7 +54,6 @@ class ProfileViewController: UIViewController {
     
     private var refreshControl: UIRefreshControl!
     private let storageService = StorageService()
-    private let dataBase = DataBaseService()
     
     private lazy var imagePickerController: UIImagePickerController = {
         let ip = UIImagePickerController()
@@ -88,19 +87,19 @@ class ProfileViewController: UIViewController {
     
     private func fetchItems() {
         guard let user = Auth.auth().currentUser else { return }
-        dataBase.fetchUserItems(userId: user.uid) { [weak self] result in
+        DataBaseService.shared.fetchUserItems(userId: user.uid) { [weak self] result in
             switch result {
             case .failure(let error):
                 self?.showAlert(title: "Error loading", message: "could not load user items: \(error.localizedDescription)")
             case .success(let items):
-                self?.myItems = items.sorted { $0.listedDate.dateValue() > $1.listedDate.dateValue() }
+                self?.myItems = items
             }
             self?.refreshControl.endRefreshing()
         }
     }
     
     private func fetchFavorites() {
-        dataBase.fetchFavorites { [weak self] result in
+        DataBaseService.shared.fetchFavorites { [weak self] result in
             switch result {
             case .failure(let error):
                 self?.showAlert(title: "Error loading", message: "could not load favorites: \(error.localizedDescription)")
@@ -161,7 +160,7 @@ class ProfileViewController: UIViewController {
     }
     
     private func updateDataBaseUser(displayName: String, photoURL: String) {
-        dataBase.updateDataBaseUser(displayName: displayName, photoURL: photoURL) { result in
+        DataBaseService.shared.updateDataBaseUser(displayName: displayName, photoURL: photoURL) { result in
             switch result {
             case .failure(let error):
                 print("failed to update user: \(error.localizedDescription)")

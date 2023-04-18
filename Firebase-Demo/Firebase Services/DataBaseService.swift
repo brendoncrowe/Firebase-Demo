@@ -13,6 +13,10 @@ import FirebaseAuth
 
 class DataBaseService {
     
+   static let shared = DataBaseService()
+    
+    private init() {}
+    
     static let itemsCollection = "items" // collection name
     static let usersCollection = "users"
     static let commentsCollection = "comments" // sub collection on an item document
@@ -142,7 +146,7 @@ class DataBaseService {
                 completion(.failure(error))
             } else if let snapshot = snapshot {
                 let items = snapshot.documents.map { Item($0.data()) }
-                completion(.success(items))
+                completion(.success(items.sorted { $0.listedDate.dateValue() > $1.listedDate.dateValue()}))
             }
         }
     }
@@ -154,7 +158,7 @@ class DataBaseService {
                 completion(.failure(error))
             } else if let snapshot = snapshot {
                 let favorites = snapshot.documents.map { Favorite($0.data()) }
-                completion(.success(favorites))
+                completion(.success(favorites.sorted { $0.favoritedDate.dateValue() > $1.favoritedDate.dateValue()}))
             }
         }
     }

@@ -14,7 +14,6 @@ class SellerItemsController: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
     
-    private var database = DataBaseService()
     private var item: Item
     private var items = [Item]() {
         didSet {
@@ -44,7 +43,7 @@ class SellerItemsController: UIViewController {
     }
     
     private func fetchSellerItems() {
-        database.fetchUserItems(userId: item.sellerId) { [weak self] result in
+        DataBaseService.shared.fetchUserItems(userId: item.sellerId) { [weak self] result in
             switch result {
             case .failure:
                 DispatchQueue.main.async {

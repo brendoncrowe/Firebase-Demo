@@ -17,7 +17,6 @@ class ItemDetailController: UIViewController {
     
     private var item: Item
     private var originalValueForConstraint: CGFloat = 0
-    private var dataBase = DataBaseService()
     private var listener: ListenerRegistration?
     private var isFavorited = false {
         didSet {
@@ -41,12 +40,6 @@ class ItemDetailController: UIViewController {
         let gesture = UITapGestureRecognizer()
         gesture.addTarget(self, action: #selector(dismissKeyboard))
         return gesture
-    }()
-    
-    private lazy var dateFormatter: DateFormatter = {
-        let formatter = DateFormatter()
-        formatter.dateFormat = "EEEE, MMM d, h:mm a"
-        return formatter
     }()
     
     init?(coder: NSCoder, item: Item) {
@@ -89,7 +82,7 @@ class ItemDetailController: UIViewController {
     
     private func updateUI() {
         // check if item is favorited in order to update heart button
-        dataBase.checkItemIsInFavorites(item: item) { [weak self] result in
+        DataBaseService.shared.checkItemIsInFavorites(item: item) { [weak self] result in
             switch result {
             case .failure(let error):
                 DispatchQueue.main.async {
@@ -124,7 +117,7 @@ class ItemDetailController: UIViewController {
     }
     
     private func postComment(text: String) {
-        dataBase.postComment(item: item, comment: text) { [weak self] result in
+        DataBaseService.shared.postComment(item: item, comment: text) { [weak self] result in
             switch result {
             case .failure(let error):
                 DispatchQueue.main.async {
@@ -168,7 +161,7 @@ class ItemDetailController: UIViewController {
     @IBAction func favoriteButtonPressed(_ sender: UIBarButtonItem) {
         
         if isFavorited { // remove from favorites
-            dataBase.removeFromFavorites(item: item) { [weak self] result in
+            DataBaseService.shared.removeFromFavorites(item: item) { [weak self] result in
                 switch result {
                 case .failure(let error):
                     DispatchQueue.main.async {
@@ -182,7 +175,7 @@ class ItemDetailController: UIViewController {
                 }
             }
         } else { // add to favorites
-            dataBase.addToFavorites(item: item) { [weak self] result in
+            DataBaseService.shared.addToFavorites(item: item) { [weak self] result in
                 switch result {
                 case .failure(let error):
                     DispatchQueue.main.async {
@@ -207,7 +200,7 @@ extension ItemDetailController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "commentCell", for: indexPath)
         let comment = comments[indexPath.row]
-        let dateString = dateFormatter.string(from: comment.commentDate.dateValue())
+        let dateString = comment.commentDate.dateValue().dateString()
         var content = cell.defaultContentConfiguration()
         content.text = comment.text
         content.secondaryText = "@" + comment.sellerName + " \(dateString)"

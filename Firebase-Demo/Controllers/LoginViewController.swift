@@ -31,7 +31,6 @@ class LoginViewController: UIViewController {
     
     private var accountState: AccountState = .existingUser
     private var authSession = AuthenticationSession()
-    private var dataBase = DataBaseService()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -75,7 +74,7 @@ class LoginViewController: UIViewController {
     }
     
     private func createDatabaseUser(authDataResult: AuthDataResult) {
-        dataBase.createDataBaseUser(authDataResult: authDataResult) { [weak self] result in
+        DataBaseService.shared.createDataBaseUser(authDataResult: authDataResult) { [weak self] result in
             switch result {
             case .failure(let error):
                 DispatchQueue.main.async {
