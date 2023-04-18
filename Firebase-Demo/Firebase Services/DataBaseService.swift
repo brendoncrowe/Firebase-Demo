@@ -146,4 +146,16 @@ class DataBaseService {
             }
         }
     }
+    
+    public func fetchFavorites(completion: @escaping (Result<[Favorite], Error>) -> ()) {
+        guard let user = Auth.auth().currentUser else { return }
+        dataBase.collection(DataBaseService.usersCollection).document(user.uid).collection(DataBaseService.favoritesCollection).getDocuments { snapshot, error in
+            if let error = error {
+                completion(.failure(error))
+            } else if let snapshot = snapshot {
+                let favorites = snapshot.documents.map { Favorite($0.data()) }
+                completion(.success(favorites))
+            }
+        }
+    }
 }

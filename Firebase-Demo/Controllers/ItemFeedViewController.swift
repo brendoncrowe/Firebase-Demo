@@ -27,7 +27,6 @@ class ItemFeedViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configureTableView()
-        title = "Items for sale"
     }
     
     override func viewDidAppear(_ animated: Bool) {

@@ -61,3 +61,16 @@ class DesignableImageView: UIImageView {
     layer.borderColor = borderColor
   }
 }
+
+class DesignableLabel: UILabel {
+    @IBInspectable var cornerRadius: CGFloat = 0
+    @IBInspectable var borderWidth: CGFloat = 0
+    @IBInspectable var borderColor: CGColor = UIColor.black.cgColor
+    
+    override func layoutSubviews() {
+      super.layoutSubviews()
+      layer.cornerRadius = cornerRadius
+      layer.borderWidth = borderWidth
+      layer.borderColor = borderColor
+    }
+  }

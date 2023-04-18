@@ -30,7 +30,7 @@ class ProfileViewController: UIViewController {
         }
     }
     
-    private var favorites = [String]() {
+    private var favorites = [Favorite]() {
         didSet {
             DispatchQueue.main.async {
                 self.tableView.reloadData()
@@ -52,6 +52,7 @@ class ProfileViewController: UIViewController {
         }
     }
     
+    private var refreshControl: UIRefreshControl!
     private let storageService = StorageService()
     private let dataBase = DataBaseService()
     
@@ -65,8 +66,9 @@ class ProfileViewController: UIViewController {
         super.viewDidLoad()
         updateUI()
         configureTV()
+        loadData()
+        configureRC()
         displayNameTextField.delegate = self
-        fetchItems()
     }
     
     private func updateUI() { // set the user info with this function
@@ -78,6 +80,12 @@ class ProfileViewController: UIViewController {
         profileImageView.kf.setImage(with: user.photoURL)
     }
     
+    private func configureRC() {
+        refreshControl = UIRefreshControl()
+        tableView.refreshControl = refreshControl
+        refreshControl.addTarget(self, action: #selector(loadData), for: .valueChanged)
+    }
+    
     private func fetchItems() {
         guard let user = Auth.auth().currentUser else { return }
         dataBase.fetchUserItems(userId: user.uid) { [weak self] result in
@@ -85,9 +93,27 @@ class ProfileViewController: UIViewController {
             case .failure(let error):
                 self?.showAlert(title: "Error loading", message: "could not load user items: \(error.localizedDescription)")
             case .success(let items):
-                self?.myItems = items
+                self?.myItems = items.sorted { $0.listedDate.dateValue() > $1.listedDate.dateValue() }
             }
+            self?.refreshControl.endRefreshing()
         }
+    }
+    
+    private func fetchFavorites() {
+        dataBase.fetchFavorites { [weak self] result in
+            switch result {
+            case .failure(let error):
+                self?.showAlert(title: "Error loading", message: "could not load favorites: \(error.localizedDescription)")
+            case .success(let favorites):
+                self?.favorites = favorites
+            }
+            self?.refreshControl.endRefreshing()
+        }
+    }
+    
+    @objc private func loadData() {
+        fetchItems()
+        fetchFavorites()
     }
     
     private func configureTV() {
@@ -104,7 +130,6 @@ class ProfileViewController: UIViewController {
         }
         
         guard let user = Auth.auth().currentUser else { return }
-        
         // resize image before uploading to firebase using UIImage extension
         let resizedImage = UIImage.resizeImage(originalImage: selectedImage, rect: profileImageView.bounds)
         
@@ -116,7 +141,6 @@ class ProfileViewController: UIViewController {
                 }
             case .success(let url):
                 self?.updateDataBaseUser(displayName: displayName, photoURL: url.absoluteString)
-                
                 // to make a change to the user's name, you must make a request to Firebase
                 let request = Auth.auth().currentUser?.createProfileChangeRequest()
                 request?.displayName = displayName
@@ -193,7 +217,6 @@ class ProfileViewController: UIViewController {
 }
 
 extension ProfileViewController: UITextFieldDelegate {
-    
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         return true
@@ -213,8 +236,8 @@ extension ProfileViewController: UITableViewDataSource {
             let item = myItems[indexPath.row]
             cell.configureCell(for: item)
         } else {
-            let _ = favorites[indexPath.row]
-//            cell.configureCell(for: favorite)
+            let favorite = favorites[indexPath.row]
+            cell.configureCell(for: favorite)
         }
         return cell
     }
@@ -231,7 +254,6 @@ extension ProfileViewController: UITableViewDelegate {
 }
 
 extension ProfileViewController: PHPickerViewControllerDelegate {
-    
     func picker(_ picker: PHPickerViewController, didFinishPicking results: [PHPickerResult]) {
         if !results.isEmpty {
             let result = results.first!
@@ -257,7 +279,6 @@ extension ProfileViewController: PHPickerViewControllerDelegate {
 }
 
 extension ProfileViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
-    
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         guard let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage else { return }
         selectedImage = image

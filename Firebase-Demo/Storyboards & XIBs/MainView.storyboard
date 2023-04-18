@@ -144,7 +144,7 @@
             </objects>
             <point key="canvasLocation" x="364" y="1027"/>
         </scene>
-        <!--Item Feed View Controller-->
+        <!--Marketplace-->
         <scene sceneID="qfc-bx-A46">
             <objects>
                 <viewController storyboardIdentifier="ItemFeedViewController" id="WzV-wV-s3I" customClass="ItemFeedViewController" customModule="Firebase_Demo" customModuleProvider="target" sceneMemberID="viewController">
@@ -176,7 +176,7 @@
                             <constraint firstItem="1pF-ek-WDd" firstAttribute="trailing" secondItem="gTE-CR-lNd" secondAttribute="trailing" id="rvY-MS-vlC"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="q62-4V-Oj3"/>
+                    <navigationItem key="navigationItem" title="Marketplace" largeTitleDisplayMode="always" id="q62-4V-Oj3"/>
                     <connections>
                         <outlet property="tableView" destination="1pF-ek-WDd" id="kGL-n1-ep2"/>
                     </connections>
@@ -346,7 +346,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VwI-FJ-nGy" userLabel="Container View">
+                            <view alpha="0.69999999999999996" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VwI-FJ-nGy" userLabel="Container View">
                                 <rect key="frame" x="0.0" y="718" width="393" height="100"/>
                                 <subviews>
                                     <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="enter comment" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="EkF-PP-NKZ">
@@ -356,6 +356,7 @@
                                     </textField>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tTw-pu-JcN">
                                         <rect key="frame" x="327" y="32.666666666666629" width="58" height="35"/>
+                                        <color key="tintColor" systemColor="systemBackgroundColor"/>
                                         <state key="normal" title="Button"/>
                                         <buttonConfiguration key="configuration" style="plain" title="Post"/>
                                         <connections>
@@ -363,7 +364,7 @@
                                         </connections>
                                     </button>
                                 </subviews>
-                                <color key="backgroundColor" systemColor="systemTealColor"/>
+                                <color key="backgroundColor" systemColor="systemBlueColor"/>
                                 <constraints>
                                     <constraint firstItem="EkF-PP-NKZ" firstAttribute="centerY" secondItem="VwI-FJ-nGy" secondAttribute="centerY" id="OnN-rp-uKR"/>
                                     <constraint firstAttribute="trailing" secondItem="tTw-pu-JcN" secondAttribute="trailing" constant="8" id="Vcs-l1-NlN"/>
@@ -416,7 +417,7 @@
                             <constraint firstItem="TLL-fx-3CL" firstAttribute="trailing" secondItem="fUB-fR-izV" secondAttribute="trailing" id="yAv-MB-2hJ"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="EWB-Fx-FR7">
+                    <navigationItem key="navigationItem" largeTitleDisplayMode="never" id="EWB-Fx-FR7">
                         <barButtonItem key="rightBarButtonItem" title="Item" image="heart" catalog="system" id="o6w-3m-awB">
                             <color key="tintColor" systemColor="systemRedColor"/>
                             <connections>
@@ -477,8 +478,8 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="OL5-Nf-9QW" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Item Feed" image="tag" catalog="system" id="JsA-bK-ksa"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Znu-qk-dOG">
-                        <rect key="frame" x="0.0" y="59" width="393" height="44"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" largeTitles="YES" id="Znu-qk-dOG">
+                        <rect key="frame" x="0.0" y="59" width="393" height="96"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
@@ -504,11 +505,11 @@
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
+        <systemColor name="systemBlueColor">
+            <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
         <systemColor name="systemRedColor">
             <color red="1" green="0.23137254901960785" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </systemColor>
-        <systemColor name="systemTealColor">
-            <color red="0.18823529411764706" green="0.69019607843137254" blue="0.7803921568627451" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>
