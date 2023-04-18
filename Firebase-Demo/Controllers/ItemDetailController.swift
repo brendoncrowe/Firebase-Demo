@@ -107,7 +107,6 @@ class ItemDetailController: UIViewController {
     
     private func configureVC() {
         tableView.dataSource = self
-        tableView.delegate = self
         commentTextField.delegate = self
         tableView.tableHeaderView = HeaderView(imageURL: item.imageURL)
         originalValueForConstraint = containerViewYConstraint.constant
@@ -217,10 +216,6 @@ extension ItemDetailController: UITableViewDataSource {
     }
 }
 
-
-extension ItemDetailController: UITableViewDelegate {
-    
-}
 
 extension ItemDetailController: UITextFieldDelegate {
     

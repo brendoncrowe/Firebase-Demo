@@ -67,6 +67,7 @@ extension ItemFeedViewController: UITableViewDataSource {
         }
         let item = items[indexPath.row]
         cell.configureCell(for: item)
+        cell.delegate = self
         return cell
     }
 }
@@ -111,5 +112,15 @@ extension ItemFeedViewController: UITableViewDelegate {
             return false
         }
         return true
+    }
+}
+
+extension ItemFeedViewController: ItemCellDelegate {
+    func didSelectSeller(_ itemCell: ItemCell, item: Item) {
+        let storyboard = UIStoryboard(name: "MainView", bundle: nil)
+        let viewController = storyboard.instantiateViewController(identifier: "SellerItemsController") { coder in
+            return SellerItemsController(coder: coder, item: item)
+        }
+        navigationController?.pushViewController(viewController, animated: true)
     }
 }
